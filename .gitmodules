@@ -7,3 +7,6 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/michaelkamerath/backend
+[submodule "GUI"]
+	path = GUI
+	url = https://github.com/michaelkamerath/GUI
