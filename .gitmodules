@@ -1,6 +1,6 @@
 [submodule "Backend"]
 	path = Backend
-	url = https://github.com/michaelkamerath/Backend
+	url = https://gitub.com/michaelkamerath/Backend
 [submodule "Server"]
 	path = Server
 	url = https://github.com/michaelkamerath/Server
