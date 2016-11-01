@@ -13,6 +13,8 @@ class MyFrame : public wxFrame
 {
 public:
   MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+  wxButton *testButton;
+  wxButton *button2;
 private:
   void OnHello(wxCommandEvent& event);
   void OnExit(wxCommandEvent& event);
@@ -21,17 +23,20 @@ private:
 };
 enum
 {
-  ID_Hello = 1
+	ID_Hello = 1,
+	BUTTON_Hello = 2
 };
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
 EVT_MENU(ID_Hello, MyFrame::OnHello)
 EVT_MENU(wxID_EXIT, MyFrame::OnExit)
 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
+EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
   MyFrame *frame = new MyFrame("Hello World", wxPoint(50, 50), wxSize(450, 340));
+  
   frame->Show(true);
   return true;
 }
@@ -51,6 +56,10 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   SetMenuBar(menuBar);
   CreateStatusBar();
   SetStatusText("Welcome to wxWidgets!");
+  testButton = new wxButton(this, BUTTON_Hello, _T("Hello World"), wxPoint(120,200), wxSize(100,50));
+  button2 = new wxButton(this, ID_Hello, _T("Hello"), wxPoint(223, 200), wxSize(100,50));
+
+
 }
 void MyFrame::OnExit(wxCommandEvent& event)
 {
