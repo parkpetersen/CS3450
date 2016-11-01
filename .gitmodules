@@ -1,9 +1,0 @@
-[submodule "Backend"]
-	path = Backend
-	url = https://github.com/michaelkamerath/Backend
-[submodule "Server"]
-	path = Server
-	url = https://github.com/michaelkamerath/Server
-[submodule "backend"]
-	path = GUI
-	url = https://github.com/michaelkamerath/GUI
