@@ -2,6 +2,7 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
 #include "LoginScreen.h"
+#include "CreateAccount.h"
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -32,6 +33,8 @@ EVT_MENU(ID_Hello, MyFrame::OnHello)
 EVT_MENU(wxID_EXIT, MyFrame::OnExit)
 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
 EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)
+EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
+EVT_BUTTON(BUTTON_create, login::onCreate)
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()

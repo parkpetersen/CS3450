@@ -1,6 +1,7 @@
 #include <wx/wx.h>
 #include <wx/sizer.h>
 #include "LoginScreen.h"
+#include "CreateAccount.h"
 
 login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
@@ -10,12 +11,12 @@ login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxBoxSizer *horizontalBoxTwo = new wxBoxSizer(wxHORIZONTAL);
 
 
-	wxButton *exit = new wxButton(this, wxID_ANY, _T("Exit"),wxDefaultPosition, wxSize(140, 30));
-	wxButton *create = new wxButton(this, wxID_ANY, _T("Create Account"),wxDefaultPosition, wxSize(140, 30));
-	wxButton *login = new wxButton(this, wxID_ANY, _T("Login"), wxDefaultPosition, wxSize(140, 30));
+	exit = new wxButton(this, BUTTON_exit, _T("Exit"),wxDefaultPosition, wxSize(140, 30));
+	create = new wxButton(this, BUTTON_create, _T("Create Account"),wxDefaultPosition, wxSize(140, 30));
+	loginBtn = new wxButton(this, BUTTON_login, _T("Login"), wxDefaultPosition, wxSize(140, 30));
 
 	horizontalBox->Add(exit, wxCENTER, 0);
-	horizontalBox->Add(login, wxCENTER, 0);
+	horizontalBox->Add(loginBtn, wxCENTER, 0);
 	horizontalBox->Add(create, wxCENTER, 0);
 
 	horizontalBoxTwo->Add(new wxTextCtrl(this, 0, "UserName", wxDefaultPosition,
@@ -31,6 +32,13 @@ login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	SetSizerAndFit(verticalBox);
 	CenterOnParent();
 	Show(0);
+}
+
+void login::onCreate(wxCommandEvent& event)
+{
+	Show(0);
+	CreateAccount::CreateAccount OnOpen(event);
+
 }
 
 
