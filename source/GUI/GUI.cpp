@@ -1,6 +1,7 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
+#include "LoginScreen.h"
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -56,8 +57,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   SetMenuBar(menuBar);
   CreateStatusBar();
   SetStatusText("Welcome to wxWidgets!");
-  testButton = new wxButton(this, BUTTON_Hello, _T("Hello World"), wxPoint(120,200), wxSize(100,50));
-  button2 = new wxButton(this, ID_Hello, _T("Hello"), wxPoint(223, 200), wxSize(100,50));
+  login *loginScreen = new login(this);
+  loginScreen->display();
 
 
 }
