@@ -12,7 +12,8 @@ public:
 	wxButton *loginBtn;
 	login(wxFrame* parent);
 	void display();
-	void onCreate(wxCommandEvent& event);
+	void hide();
+	//void onCreate(wxCommandEvent& event);
 	//~login();
 
 };

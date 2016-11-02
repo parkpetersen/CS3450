@@ -2,6 +2,7 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
 #include "LoginScreen.h"
+
 #include "CreateAccount.h"
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -15,12 +16,14 @@ class MyFrame : public wxFrame
 {
 public:
   MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
-  wxButton *testButton;
-  wxButton *button2;
+  login *loginScreen;
+  CreateAccount *createAccountScreen;
 private:
   void OnHello(wxCommandEvent& event);
   void OnExit(wxCommandEvent& event);
   void OnAbout(wxCommandEvent& event);
+  void OnCreateAccount(wxCommandEvent& event);
+  void OnCreateCancel(wxCommandEvent& event);
   wxDECLARE_EVENT_TABLE();
 };
 enum
@@ -32,9 +35,11 @@ wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
 EVT_MENU(ID_Hello, MyFrame::OnHello)
 EVT_MENU(wxID_EXIT, MyFrame::OnExit)
 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
-EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)
+EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)            //Event table tells buttons what to do when pressed
 EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
-EVT_BUTTON(BUTTON_create, login::onCreate)
+EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
+EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
+EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateCancel)
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
@@ -60,7 +65,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   SetMenuBar(menuBar);
   CreateStatusBar();
   SetStatusText("Welcome to wxWidgets!");
-  login *loginScreen = new login(this);
+  loginScreen = new login(this);
+  createAccountScreen = new CreateAccount(this);
   loginScreen->display();
 
 
@@ -77,6 +83,20 @@ void MyFrame::OnAbout(wxCommandEvent& event)
 void MyFrame::OnHello(wxCommandEvent& event)
 {
   wxLogMessage("Hello world from wxWidgets!");
+}
+
+void MyFrame::OnCreateAccount(wxCommandEvent& event)
+{
+	loginScreen->hide();
+	createAccountScreen->display();
+
+
+}
+
+void MyFrame::OnCreateCancel(wxCommandEvent& event)
+{
+	createAccountScreen->hide();
+	loginScreen->display();
 }
 
 int main(int argc, char* argv[])

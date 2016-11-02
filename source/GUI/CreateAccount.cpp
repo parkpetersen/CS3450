@@ -10,11 +10,11 @@ CreateAccount::CreateAccount(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefa
 	wxBoxSizer *horizontalBoxTwo = new wxBoxSizer(wxHORIZONTAL);
 
 
-	wxButton *login = new wxButton(this, wxID_ANY, _T("Login"), wxDefaultPosition, wxSize(140, 30));
-	wxButton *create = new wxButton(this, wxID_ANY, _T("Create Account"), wxDefaultPosition, wxSize(140, 30));
+	cancel = new wxButton(this, BUTTON_cancel, _T("Cancel"), wxDefaultPosition, wxSize(140, 30));
+	createProfile = new wxButton(this, BUTTON_createProfile, _T("Create Account"), wxDefaultPosition, wxSize(140, 30));
 
-	horizontalBox->Add(login, wxCENTER, 0);
-	horizontalBox->Add(create, wxCENTER, 0);
+	horizontalBox->Add(cancel, wxCENTER, 0);
+	horizontalBox->Add(createProfile, wxCENTER, 0);
 
 	horizontalBoxTwo->Add(new wxTextCtrl(this, 0, "Username", wxDefaultPosition,
 		wxSize(140, 30)), 1, wxCENTER, 0);
@@ -40,4 +40,9 @@ void CreateAccount::display()
 {
 	Show(1);
 
+}
+
+void CreateAccount::hide()
+{
+	Show(0);
 }

@@ -1,7 +1,6 @@
 #include <wx/wx.h>
 #include <wx/sizer.h>
 #include "LoginScreen.h"
-#include "CreateAccount.h"
 
 login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
@@ -34,16 +33,15 @@ login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	Show(0);
 }
 
-void login::onCreate(wxCommandEvent& event)
-{
-	Show(0);
-	CreateAccount::CreateAccount OnOpen(event);
-
-}
 
 
 void login::display()
 {
 	Show(1);
 
+}
+
+void login::hide()
+{
+	Show(0);
 }
