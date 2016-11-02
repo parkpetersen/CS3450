@@ -12,13 +12,12 @@ public:
 	wxButton *cancel;
 	void display();
 	void hide();
-	void OnOpen(wxCommandEvent& event);
 
 };
 
 enum
 {
-	BUTTON_cancel = wxID_HIGHEST + 1,
-	BUTTON_createProfile = wxID_HIGHEST + 2
+	BUTTON_cancel = wxID_HIGHEST + 4,
+	BUTTON_createProfile = wxID_HIGHEST + 5
 };
 #endif

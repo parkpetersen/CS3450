@@ -1,8 +1,9 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
-#include "LoginScreen.h"
+#include "PlayModeScreen.h"
 
+#include "LoginScreen.h"
 #include "CreateAccount.h"
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -18,12 +19,16 @@ public:
   MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
   login *loginScreen;
   CreateAccount *createAccountScreen;
+  PlayModeScreen *modeScreen;
+
 private:
   void OnHello(wxCommandEvent& event);
   void OnExit(wxCommandEvent& event);
   void OnAbout(wxCommandEvent& event);
   void OnCreateAccount(wxCommandEvent& event);
   void OnCreateCancel(wxCommandEvent& event);
+  void OnLogin(wxCommandEvent& event);
+  void OnModeCancel(wxCommandEvent& event);
   wxDECLARE_EVENT_TABLE();
 };
 enum
@@ -40,6 +45,8 @@ EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
 EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
 EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
 EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateCancel)
+EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
+EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
@@ -67,6 +74,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   SetStatusText("Welcome to wxWidgets!");
   loginScreen = new login(this);
   createAccountScreen = new CreateAccount(this);
+  modeScreen = new PlayModeScreen(this);
   loginScreen->display();
 
 
@@ -98,6 +106,21 @@ void MyFrame::OnCreateCancel(wxCommandEvent& event)
 	createAccountScreen->hide();
 	loginScreen->display();
 }
+
+void MyFrame::OnLogin(wxCommandEvent& event)
+{
+	loginScreen->hide();
+	modeScreen->display();
+
+}
+
+void MyFrame::OnModeCancel(wxCommandEvent& event)
+{
+	modeScreen->hide();
+	loginScreen->display();
+}
+
+
 
 int main(int argc, char* argv[])
 {

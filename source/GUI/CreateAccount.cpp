@@ -31,11 +31,6 @@ CreateAccount::CreateAccount(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefa
 	Show(0);
 }
 
-void CreateAccount::OnOpen(wxCommandEvent& event)
-{
-	Show(1);
-}
-
 void CreateAccount::display()
 {
 	Show(1);
