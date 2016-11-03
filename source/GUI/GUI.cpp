@@ -51,8 +51,7 @@ wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
-  MyFrame *frame = new MyFrame("Deal 52", wxPoint(50, 50), wxSize(450, 340));
-  frame->SetBackgroundColour(wxColour(*wxGREEN));
+  MyFrame *frame = new MyFrame("Hello World", wxPoint(50, 50), wxSize(450, 340));
   
   frame->Show(true);
   return true;
