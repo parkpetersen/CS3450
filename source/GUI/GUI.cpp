@@ -1,6 +1,11 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
+#include "PlayModeScreen.h"
+#include "LoginScreen.h"
+#include "CreateAccount.h"
+#include "GameOver.h"
+
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -13,25 +18,50 @@ class MyFrame : public wxFrame
 {
 public:
   MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+  login *loginScreen;
+  CreateAccount *createAccountScreen;
+  PlayModeScreen *modeScreen;
+  GameOver *gameOver;
+
+
 private:
   void OnHello(wxCommandEvent& event);
   void OnExit(wxCommandEvent& event);
   void OnAbout(wxCommandEvent& event);
+  void OnCreateAccount(wxCommandEvent& event);
+  void OnCreateCancel(wxCommandEvent& event);
+  void OnLogin(wxCommandEvent& event);
+  void OnModeHearts(wxCommandEvent& event);
+  void OnModeCancel(wxCommandEvent& event);
+  void OnMainMenu(wxCommandEvent& event);
+  void OnPlayAgain(wxCommandEvent& event);
   wxDECLARE_EVENT_TABLE();
 };
 enum
 {
-  ID_Hello = 1
+	ID_Hello = 1,
+	BUTTON_Hello = 2
 };
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
 EVT_MENU(ID_Hello, MyFrame::OnHello)
 EVT_MENU(wxID_EXIT, MyFrame::OnExit)
 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
+EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)            //Event table tells buttons what to do when pressed
+EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
+EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
+EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
+EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateCancel)
+EVT_BUTTON(BUTTON_Hearts, MyFrame::OnModeHearts)
+EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
+EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
+EVT_BUTTON(BUTTON_mainMenu, MyFrame::OnMainMenu)
+EVT_BUTTON(BUTTON_playAgain, MyFrame::OnPlayAgain)
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
-  MyFrame *frame = new MyFrame("Hello World", wxPoint(50, 50), wxSize(450, 340));
+  MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(450, 340));
+  
   frame->Show(true);
   return true;
 }
@@ -51,6 +81,13 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   SetMenuBar(menuBar);
   CreateStatusBar();
   SetStatusText("Welcome to wxWidgets!");
+  loginScreen = new login(this);
+  createAccountScreen = new CreateAccount(this);
+  modeScreen = new PlayModeScreen(this);
+  gameOver = new GameOver(this);
+  loginScreen->display();
+
+
 }
 void MyFrame::OnExit(wxCommandEvent& event)
 {
@@ -65,6 +102,58 @@ void MyFrame::OnHello(wxCommandEvent& event)
 {
   wxLogMessage("Hello world from wxWidgets!");
 }
+
+void MyFrame::OnCreateAccount(wxCommandEvent& event)
+{
+	loginScreen->hide();
+	createAccountScreen->display();
+
+}
+
+void MyFrame::OnCreateCancel(wxCommandEvent& event)
+{
+	createAccountScreen->hide();
+	loginScreen->display();
+}
+
+void MyFrame::OnLogin(wxCommandEvent& event)
+{
+	loginScreen->hide();
+	modeScreen->display();
+
+}
+
+void MyFrame::OnModeHearts(wxCommandEvent& event)
+{
+	modeScreen->hide();
+	//Replace with hearts game display when available
+	//This one should be connected to the game board
+	gameOver->display();
+
+}
+
+void MyFrame::OnModeCancel(wxCommandEvent& event)
+{
+	modeScreen->hide();
+	loginScreen->display();
+}
+
+void MyFrame::OnMainMenu(wxCommandEvent& event)
+{
+	gameOver->hide();
+	modeScreen->display();
+
+}
+
+void MyFrame::OnPlayAgain(wxCommandEvent& event)
+{
+	gameOver->hide();
+	modeScreen->display();
+
+
+}
+
+
 
 int main(int argc, char* argv[])
 {
