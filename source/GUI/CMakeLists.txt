@@ -4,6 +4,8 @@ include_directories(${externIncs} ${CMAKE_SOURCE_DIR})
 add_executable(client
 CreateAccount.cpp
 CreateAccount.h
+GameOver.h
+GameOver.cpp
 GUI.cpp
 LoginScreen.cpp
 LoginScreen.h
