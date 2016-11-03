@@ -73,7 +73,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   CreateStatusBar();
   SetStatusText("Welcome to Deal 52!");
   loginScreen = new login(this);
-  createAccountScreen = new CreateAccount(this);
+  createAccountScreen = new CreateAccount(this); 
   modeScreen = new PlayModeScreen(this);
   loginScreen->display();
 
