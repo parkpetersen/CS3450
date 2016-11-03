@@ -51,7 +51,7 @@ wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
-  MyFrame *frame = new MyFrame("Super Cards", wxPoint(50, 50), wxSize(450, 340));
+  MyFrame *frame = new MyFrame("Deal 52", wxPoint(50, 50), wxSize(450, 340));
   frame->SetBackgroundColour(wxColour(*wxGREEN));
   
   frame->Show(true);
@@ -62,7 +62,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 {
   wxMenu *menuFile = new wxMenu;
   menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
-    "Welcome to Super Cards!");
+    "Welcome to Deal 52!");
   menuFile->AppendSeparator();
   menuFile->Append(wxID_EXIT);
   wxMenu *menuHelp = new wxMenu;
@@ -72,7 +72,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   menuBar->Append(menuHelp, "&Help");
   SetMenuBar(menuBar);
   CreateStatusBar();
-  SetStatusText("Welcome to Super Cards!");
+  SetStatusText("Welcome to Deal 52!");
   loginScreen = new login(this);
   createAccountScreen = new CreateAccount(this);
   modeScreen = new PlayModeScreen(this);
@@ -87,11 +87,11 @@ void MyFrame::OnExit(wxCommandEvent& event)
 void MyFrame::OnAbout(wxCommandEvent& event)
 {
   wxMessageBox("Choose between three of the funnest card games!",
-    "About Super Cards", wxOK | wxICON_INFORMATION);
+    "About Deal 52", wxOK | wxICON_INFORMATION);
 }
 void MyFrame::OnHello(wxCommandEvent& event)
 {
-  wxLogMessage("Welcome to Super Cards!");
+  wxLogMessage("Welcome to Deal 52!");
 }
 
 void MyFrame::OnCreateAccount(wxCommandEvent& event)
