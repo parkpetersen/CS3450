@@ -3,14 +3,14 @@ xpGetExtern(externIncs externLibs PUBLIC boost wxWidgets)
 include_directories(${externIncs} ${CMAKE_SOURCE_DIR})
 add_executable(client
 CreateAccount.cpp
-CreateAccount.h
-GameOver.h
+CreateAccount.hpp
+GameOver.hpp
 GameOver.cpp
 GUI.cpp
 LoginScreen.cpp
-LoginScreen.h
+LoginScreen.hpp
 PlayModeScreen.cpp
-PlayModeScreen.h
+PlayModeScreen.hpp
 )
 target_link_libraries(client ${externLibs})
 target_include_directories(client ${externIncs})
