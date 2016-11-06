@@ -2,10 +2,16 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
 #include "PlayModeScreen.h"
+<<<<<<< HEAD
 #include "LoginScreen.h"
 #include "CreateAccount.h"
 #include "GameOver.h"
 
+=======
+
+#include "LoginScreen.h"
+#include "CreateAccount.h"
+>>>>>>> refs/remotes/michaelkamerath/master
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -21,8 +27,11 @@ public:
   login *loginScreen;
   CreateAccount *createAccountScreen;
   PlayModeScreen *modeScreen;
+<<<<<<< HEAD
   GameOver *gameOver;
 
+=======
+>>>>>>> refs/remotes/michaelkamerath/master
 
 private:
   void OnHello(wxCommandEvent& event);
@@ -31,10 +40,14 @@ private:
   void OnCreateAccount(wxCommandEvent& event);
   void OnCreateCancel(wxCommandEvent& event);
   void OnLogin(wxCommandEvent& event);
+<<<<<<< HEAD
   void OnModeHearts(wxCommandEvent& event);
   void OnModeCancel(wxCommandEvent& event);
   void OnMainMenu(wxCommandEvent& event);
   void OnPlayAgain(wxCommandEvent& event);
+=======
+  void OnModeCancel(wxCommandEvent& event);
+>>>>>>> refs/remotes/michaelkamerath/master
   wxDECLARE_EVENT_TABLE();
 };
 enum
@@ -51,16 +64,25 @@ EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
 EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
 EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
 EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateCancel)
+<<<<<<< HEAD
 EVT_BUTTON(BUTTON_Hearts, MyFrame::OnModeHearts)
 EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
 EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
 EVT_BUTTON(BUTTON_mainMenu, MyFrame::OnMainMenu)
 EVT_BUTTON(BUTTON_playAgain, MyFrame::OnPlayAgain)
+=======
+EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
+EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
+>>>>>>> refs/remotes/michaelkamerath/master
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
+<<<<<<< HEAD
   MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(450, 340));
+=======
+  MyFrame *frame = new MyFrame("Hello World", wxPoint(50, 50), wxSize(450, 340));
+>>>>>>> refs/remotes/michaelkamerath/master
   
   frame->Show(true);
   return true;
@@ -84,7 +106,10 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   loginScreen = new login(this);
   createAccountScreen = new CreateAccount(this);
   modeScreen = new PlayModeScreen(this);
+<<<<<<< HEAD
   gameOver = new GameOver(this);
+=======
+>>>>>>> refs/remotes/michaelkamerath/master
   loginScreen->display();
 
 
@@ -108,6 +133,10 @@ void MyFrame::OnCreateAccount(wxCommandEvent& event)
 	loginScreen->hide();
 	createAccountScreen->display();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/michaelkamerath/master
 }
 
 void MyFrame::OnCreateCancel(wxCommandEvent& event)
@@ -123,6 +152,7 @@ void MyFrame::OnLogin(wxCommandEvent& event)
 
 }
 
+<<<<<<< HEAD
 void MyFrame::OnModeHearts(wxCommandEvent& event)
 {
 	modeScreen->hide();
@@ -132,12 +162,15 @@ void MyFrame::OnModeHearts(wxCommandEvent& event)
 
 }
 
+=======
+>>>>>>> refs/remotes/michaelkamerath/master
 void MyFrame::OnModeCancel(wxCommandEvent& event)
 {
 	modeScreen->hide();
 	loginScreen->display();
 }
 
+<<<<<<< HEAD
 void MyFrame::OnMainMenu(wxCommandEvent& event)
 {
 	gameOver->hide();
@@ -153,6 +186,8 @@ void MyFrame::OnPlayAgain(wxCommandEvent& event)
 
 }
 
+=======
+>>>>>>> refs/remotes/michaelkamerath/master
 
 
 int main(int argc, char* argv[])
