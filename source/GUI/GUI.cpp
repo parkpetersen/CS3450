@@ -2,9 +2,11 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
 #include "PlayModeScreen.h"
-
+#include "GameOver.h"
 #include "LoginScreen.h"
 #include "CreateAccount.h"
+#include "HeartsBoard.h"
+
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -20,6 +22,10 @@ public:
   login *loginScreen;
   CreateAccount *createAccountScreen;
   PlayModeScreen *modeScreen;
+  HeartsBoard *heartsBoard;
+  GameOver *gameOver;
+
+
 
 private:
   void OnHello(wxCommandEvent& event);
@@ -29,6 +35,11 @@ private:
   void OnCreateCancel(wxCommandEvent& event);
   void OnLogin(wxCommandEvent& event);
   void OnModeCancel(wxCommandEvent& event);
+  void OnHearts(wxCommandEvent& event);
+  void OnSpades(wxCommandEvent& event);
+  void OnTest(wxCommandEvent& event);
+  void OnPlayAgain(wxCommandEvent& event);
+  void OnMainMenu(wxCommandEvent& event);
   wxDECLARE_EVENT_TABLE();
 };
 enum
@@ -46,7 +57,13 @@ EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
 EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
 EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateCancel)
 EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
+EVT_BUTTON(BUTTON_Hearts, MyFrame::OnHearts)
+EVT_BUTTON(BUTTON_Spades, MyFrame::OnSpades)
+EVT_BUTTON(BUTTON_test, MyFrame::OnTest)
 EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
+EVT_BUTTON(BUTTON_playAgain, MyFrame::OnPlayAgain)
+EVT_BUTTON(BUTTON_mainMenu, MyFrame::OnMainMenu)
+EVT_BUTTON(BUTTON_Card, MyFrame::OnHearts)
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
@@ -76,6 +93,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   loginScreen = new login(this);
   createAccountScreen = new CreateAccount(this);
   modeScreen = new PlayModeScreen(this);
+  heartsBoard = new HeartsBoard(this);
+  gameOver = new GameOver(this);
   loginScreen->display();
 
 
@@ -99,7 +118,6 @@ void MyFrame::OnCreateAccount(wxCommandEvent& event)
 	loginScreen->hide();
 	createAccountScreen->display();
 
-
 }
 
 void MyFrame::OnCreateCancel(wxCommandEvent& event)
@@ -119,6 +137,36 @@ void MyFrame::OnModeCancel(wxCommandEvent& event)
 {
 	modeScreen->hide();
 	loginScreen->display();
+}
+
+void MyFrame::OnHearts(wxCommandEvent& event)
+{
+	modeScreen->hide();
+	heartsBoard->display();
+}
+
+void MyFrame::OnSpades(wxCommandEvent& event)
+{
+	modeScreen->hide();
+	gameOver->display();
+}
+
+void MyFrame::OnTest(wxCommandEvent& event)
+{
+	modeScreen->hide();
+	gameOver->display();
+}
+
+void MyFrame::OnPlayAgain(wxCommandEvent& event)
+{
+	gameOver->hide();
+	modeScreen->display();
+}
+
+void MyFrame::OnMainMenu(wxCommandEvent& event)
+{
+	gameOver->hide();
+	modeScreen->display();
 }
 
 
