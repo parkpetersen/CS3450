@@ -1,5 +1,5 @@
-#ifndef LOGIN_H
-#define LOGIN_H
+#ifndef LOGIN_HPP
+#define LOGIN_HPP
 
 #include <wx/wx.h>
 

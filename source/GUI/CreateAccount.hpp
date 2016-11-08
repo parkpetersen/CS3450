@@ -1,5 +1,5 @@
-#ifndef CREATEACCOUNT_H
-#define CREATEACCOUNT_H
+#ifndef CREATEACCOUNT_HPP
+#define CREATEACCOUNT_HPP
 
 #include <wx/wx.h>
 
