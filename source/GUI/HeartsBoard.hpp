@@ -1,5 +1,5 @@
-#ifndef HEARTSBOARD_H
-#define HEARTSBOARD_H
+#ifndef HEARTSBOARD_HPP
+#define HEARTSBOARD_HPP
 
 #include <wx/wx.h>
 #include <vector>

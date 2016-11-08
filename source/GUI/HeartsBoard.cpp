@@ -1,6 +1,6 @@
 #include <wx/wx.h>
 #include <wx/sizer.h>
-#include "HeartsBoard.h"
+#include "HeartsBoard.hpp"
 
 HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)

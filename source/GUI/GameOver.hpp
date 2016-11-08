@@ -1,5 +1,5 @@
-#ifndef GAMEOVER_H
-#define GAMEOVER_H
+#ifndef GAMEOVER_HPP
+#define GAMEOVER_HPP
 
 #include <wx/wx.h>
 

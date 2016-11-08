@@ -1,11 +1,11 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
-#include "PlayModeScreen.h"
-#include "GameOver.h"
-#include "LoginScreen.h"
-#include "CreateAccount.h"
-#include "HeartsBoard.h"
+#include "PlayModeScreen.hpp"
+#include "GameOver.hpp"
+#include "LoginScreen.hpp"
+#include "CreateAccount.hpp"
+#include "HeartsBoard.hpp"
 
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -25,8 +25,6 @@ public:
   HeartsBoard *heartsBoard;
   GameOver *gameOver;
 
-
-
 private:
   void OnHello(wxCommandEvent& event);
   void OnExit(wxCommandEvent& event);
@@ -34,6 +32,7 @@ private:
   void OnCreateAccount(wxCommandEvent& event);
   void OnCreateCancel(wxCommandEvent& event);
   void OnLogin(wxCommandEvent& event);
+  void OnModeHearts(wxCommandEvent& event);
   void OnModeCancel(wxCommandEvent& event);
   void OnHearts(wxCommandEvent& event);
   void OnSpades(wxCommandEvent& event);
@@ -64,11 +63,12 @@ EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
 EVT_BUTTON(BUTTON_playAgain, MyFrame::OnPlayAgain)
 EVT_BUTTON(BUTTON_mainMenu, MyFrame::OnMainMenu)
 EVT_BUTTON(BUTTON_Card, MyFrame::OnHearts)
+
 wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
-  MyFrame *frame = new MyFrame("Deal 52", wxPoint(50, 50), wxSize(450, 340));
+  MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(850, 700));
   frame->SetBackgroundColour(wxColour(*wxGREEN));
   
   frame->Show(true);
@@ -91,7 +91,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   CreateStatusBar();
   SetStatusText("Welcome to Deal 52!");
   loginScreen = new login(this);
-  createAccountScreen = new CreateAccount(this);
+  createAccountScreen = new CreateAccount(this); 
   modeScreen = new PlayModeScreen(this);
   heartsBoard = new HeartsBoard(this);
   gameOver = new GameOver(this);
@@ -130,7 +130,6 @@ void MyFrame::OnLogin(wxCommandEvent& event)
 {
 	loginScreen->hide();
 	modeScreen->display();
-
 }
 
 void MyFrame::OnModeCancel(wxCommandEvent& event)
@@ -168,8 +167,6 @@ void MyFrame::OnMainMenu(wxCommandEvent& event)
 	gameOver->hide();
 	modeScreen->display();
 }
-
-
 
 int main(int argc, char* argv[])
 {

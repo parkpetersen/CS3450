@@ -1,5 +1,5 @@
-#ifndef PLAYMODESCREEN_H
-#define PLAYMODESCREEN_H
+#ifndef PLAYMODESCREEN_HPP
+#define PLAYMODESCREEN_HPP
 
 #include <wx/wx.h>
 
