@@ -8,7 +8,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	//Sizers
 	wxFlexGridSizer *verticalBox = new wxFlexGridSizer(3, 0, 10, 10);
 	wxBoxSizer *horizontalBox = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer *horizontalBox2 = new wxBoxSizer(wxHORIZONTAL);
+	//wxBoxSizer *horizontalBox2 = new wxBoxSizer(wxHORIZONTAL);
 
 	//Image used to scale the Bitmap
 	wxImage p1c;
@@ -18,23 +18,18 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	std::string cardNum;
 	for (int i = 0; i < 13; i++)
 	{
-		/*This uses a hardcoded path for the card images I used.
-		* If you can find a way to make this a relative path
-		* (or when Michael adds the card images to link it to those,)
-		* uncomment this and replace accordingly.
-		*/
-		//cardNum = "C:/Users/dozek/Desktop/cards/" + std::to_string(i + 1) + "c.png";
-		//p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
-		//p1c = p1Cards[i].ConvertToImage();
-		//p1Cards[i] = wxBitmap(p1c.Scale(63, 91));
+		cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
+		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
+		p1c = p1Cards[i].ConvertToImage();
+		p1Cards[i] = wxBitmap(p1c.Scale(63, 91));
 
 		p1Hand[i] = new wxBitmapButton(this, BUTTON_Card + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
 		horizontalBox->Add(p1Hand[i], wxCENTER, 0);
 	}
 
 
-	verticalBox->Add(horizontalBox, wxCENTER, 0);
-	verticalBox->Add(horizontalBox2, wxCENTER, 0);
+	verticalBox->Add(horizontalBox, wxBOTTOM, 0);
+	//verticalBox->Add(horizontalBox2, wxCENTER, 0);
 
 	SetSizerAndFit(verticalBox);
 
