@@ -25,14 +25,14 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	wxBitmap playerHandTop;
 	wxBitmap playerHandSide;
 
-	defaultColor.LoadFile("C:/Users/dozek/Desktop/cards/blank.jpg", wxBITMAP_TYPE_JPEG);
+	defaultColor.LoadFile("../../../../CS3450/Resources/cards/blank.jpg", wxBITMAP_TYPE_JPEG);
 	dc = defaultColor.ConvertToImage();
 	defaultColor = wxBitmap(dc.Scale(63, 91));
 
-	playerHandTop.LoadFile("C:/Users/dozek/Desktop/cards/card_back.jpg", wxBITMAP_TYPE_JPEG);
+	playerHandTop.LoadFile("../../../../CS3450/Resources/cards/card_back.jpg", wxBITMAP_TYPE_JPEG);
 	pct = playerHandTop.ConvertToImage();
 
-	playerHandSide.LoadFile("C:/Users/dozek/Desktop/cards/card_back_side.jpg", wxBITMAP_TYPE_JPEG);
+	playerHandSide.LoadFile("../../../../CS3450/Resources/cards/card_back_side.jpg", wxBITMAP_TYPE_JPEG);
 	pcs = playerHandSide.ConvertToImage();
 
 	//Initializes card images and buttons
@@ -46,7 +46,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 		* (or when Michael adds the card images to link it to those,)
 		* uncomment this and replace accordingly.
 		*/
-		cardNum = "C:/Users/dozek/Desktop/cards/" + std::to_string(i + 1) + "c.png";
+		cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
 		//cardNum = "../cards/2c.png";
 		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
 		pc = p1Cards[i].ConvertToImage();
