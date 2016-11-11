@@ -46,8 +46,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 		* (or when Michael adds the card images to link it to those,)
 		* uncomment this and replace accordingly.
 		*/
-		cardNum = "C:/Users/dozek/Desktop/cards/" + std::to_string(i + 1) + "c.png";
-		//cardNum = "../cards/2c.png";
+		cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
 		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
 		pc = p1Cards[i].ConvertToImage();
 		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
