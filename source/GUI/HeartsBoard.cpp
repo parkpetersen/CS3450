@@ -24,7 +24,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	wxBitmap defaultColor;
 	wxBitmap playerHandTop;
 	wxBitmap playerHandSide;
-	
+
 	defaultColor.LoadFile("C:/Users/dozek/Desktop/cards/blank.jpg", wxBITMAP_TYPE_JPEG);
 	dc = defaultColor.ConvertToImage();
 	defaultColor = wxBitmap(dc.Scale(63, 91));
@@ -52,7 +52,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 		pc = p1Cards[i].ConvertToImage();
 		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
 		p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
-		
+
 		p2Cards[i] = wxBitmap(pcs.Scale(72, 50));
 		p2Hand[i] = new wxBitmapButton(this, BUTTON_CARD_OTHER, p2Cards[i], wxDefaultPosition, wxSize(72, 25), 0);
 
