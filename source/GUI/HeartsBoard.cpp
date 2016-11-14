@@ -6,15 +6,15 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
 {
 	//Sizers
-	wxFlexGridSizer *verticalBoxMain = new wxFlexGridSizer(3, 0, 20, 20);
-	wxBoxSizer *horizontalBoxBtm = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer *horizontalBoxMid = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer *horizontalBoxTop = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer *verticalBoxLeft = new wxBoxSizer(wxVERTICAL);
-	wxBoxSizer *verticalBoxCenter = new wxBoxSizer(wxVERTICAL);
-	wxBoxSizer *verticalBoxRight = new wxBoxSizer(wxVERTICAL);
+	verticalBoxMain = new wxFlexGridSizer(3, 0, 20, 20);
+	horizontalBoxBtm = new wxBoxSizer(wxHORIZONTAL);
+	horizontalBoxMid = new wxBoxSizer(wxHORIZONTAL);
+	horizontalBoxTop = new wxBoxSizer(wxHORIZONTAL);
+	verticalBoxLeft = new wxBoxSizer(wxVERTICAL);
+	verticalBoxCenter = new wxBoxSizer(wxVERTICAL);
+	verticalBoxRight = new wxBoxSizer(wxVERTICAL);
 
-	wxFlexGridSizer *horizontalBoxCenter = new wxFlexGridSizer(2, 2, 10, 10);
+	horizontalBoxCenter = new wxFlexGridSizer(2, 2, 10, 10);
 
 	//Images used to scale the Bitmap
 	wxImage pc;
@@ -69,14 +69,14 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	
 
 	//Generate the center pile (need to fix the size issue)
-	for (int i = 0; i < 4; i++) {
+	/*for (int i = 0; i < 4; i++) {
 		centerPile[i] = new wxBitmapButton(this, BUTTON_CARD_CENTER + i, defaultColor, wxDefaultPosition, wxSize(63, 91), 0);
 		horizontalBoxCenter->Add(centerPile[i], wxCENTER, 0);
-	}
+	}*/
 
-	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 0);
-	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 0);
-	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 0);
+	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
+	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
+	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 50);
 	verticalBoxMain->Add(horizontalBoxTop, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
@@ -107,5 +107,12 @@ void HeartsBoard::hide()
 
 void HeartsBoard::cardClick(int i)
 {
+	//We need to make it so the player can only put one card into the middle so we don't go over four cards in the middle.
 	p1Hand[i]->Hide();
+	horizontalBoxBtm->Detach(p1Hand[i]);
+	horizontalBoxCenter->Add(p1Hand[i], wxCENTER, 50);
+	horizontalBoxCenter->Layout();
+	horizontalBoxBtm->Layout();
+	p1Hand[i]->Show();
+
 }

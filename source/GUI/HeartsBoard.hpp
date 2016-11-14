@@ -9,6 +9,17 @@ class HeartsBoard : public wxPanel
 {
 public:
 	HeartsBoard(wxFrame* parent);
+
+	//sizers
+	wxFlexGridSizer *verticalBoxMain;
+	wxBoxSizer *horizontalBoxBtm;
+	wxBoxSizer *horizontalBoxMid;
+	wxBoxSizer *horizontalBoxTop;
+	wxBoxSizer *verticalBoxLeft;
+	wxBoxSizer *verticalBoxCenter;
+	wxBoxSizer *verticalBoxRight;
+	wxFlexGridSizer *horizontalBoxCenter;
+
 	
 	//Bitmap images (should be vectors)
 	wxBitmap p1Cards[13];
