@@ -41,13 +41,8 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 	for (int i = 0; i < 13; i++)
 	{
-		/*This uses a hardcoded path for the card images I used.
-		* If you can find a way to make this a relative path
-		* (or when Michael adds the card images to link it to those,)
-		* uncomment this and replace accordingly.
-		*/
+		
 		cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
-		//cardNum = "../cards/2c.png";
 		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
 		pc = p1Cards[i].ConvertToImage();
 		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
@@ -68,8 +63,10 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 		verticalBoxLeft->Add(p2Hand[i], wxCENTER, 0);
 		verticalBoxRight->Add(p4Hand[i], wxCENTER, 0);
 		horizontalBoxTop->Add(p3Hand[i], wxCENTER, 0);
+		
 
 	}
+	
 
 	//Generate the center pile (need to fix the size issue)
 	for (int i = 0; i < 4; i++) {
@@ -84,10 +81,16 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
 
+	//p1Hand[2]->Hide();
+	//horizontalBoxMid->Remove(2);
+	//centerPile[2]->Hide();
+	//horizontalBoxCenter->Remove(2);
+	//horizontalBoxCenter->Add(p1Hand[2], wxCENTER, 0);
+
 	SetSizerAndFit(verticalBoxMain);
 
 	CenterOnParent();
-	Show(0);
+	Show(0); 
 
 }
 
@@ -100,4 +103,9 @@ void HeartsBoard::display()
 void HeartsBoard::hide()
 {
 	Show(0);
+}
+
+void HeartsBoard::cardClick(int i)
+{
+	p1Hand[i]->Hide();
 }

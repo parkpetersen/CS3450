@@ -13,6 +13,13 @@ public:
 	login(wxFrame* parent);
 	void display();
 	void hide();
+	void getInput();
+	wxFlexGridSizer *verticalBox;
+	wxBoxSizer *horizontalBox;
+	wxBoxSizer *horizontalBoxTwo;
+
+	wxTextCtrl *userNameTxt;
+	wxTextCtrl *passwordTxt;
 	//void onCreate(wxCommandEvent& event);
 	//~login();
 

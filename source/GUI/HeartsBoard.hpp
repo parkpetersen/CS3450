@@ -26,6 +26,7 @@ public:
 
 	void display();
 	void hide();
+	void cardClick(int i);
 
 };
 
