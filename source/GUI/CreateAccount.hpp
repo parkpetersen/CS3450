@@ -12,6 +12,10 @@ public:
 	wxButton *cancel;
 	void display();
 	void hide();
+	void getInput();
+
+	wxTextCtrl *userNameTxt;
+	wxTextCtrl *passwordTxt;
 
 };
 

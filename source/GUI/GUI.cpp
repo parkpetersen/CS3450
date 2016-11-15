@@ -30,6 +30,7 @@ private:
   void OnExit(wxCommandEvent& event);
   void OnAbout(wxCommandEvent& event);
   void OnCreateAccount(wxCommandEvent& event);
+  void OnCreateNewProfile(wxCommandEvent& event);
   void OnCreateCancel(wxCommandEvent& event);
   void OnLogin(wxCommandEvent& event);
   void OnModeHearts(wxCommandEvent& event);
@@ -68,7 +69,7 @@ EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)            //Event table tells buttons
 EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
 EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
 EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
-EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateCancel)
+EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateNewProfile)
 EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
 EVT_BUTTON(BUTTON_Hearts, MyFrame::OnHearts)
 EVT_BUTTON(BUTTON_Spades, MyFrame::OnSpades)
@@ -150,6 +151,13 @@ void MyFrame::OnCreateAccount(wxCommandEvent& event)
 
 void MyFrame::OnCreateCancel(wxCommandEvent& event)
 {
+	createAccountScreen->hide();
+	loginScreen->display();
+}
+
+void MyFrame::OnCreateNewProfile(wxCommandEvent& event)
+{
+	createAccountScreen->getInput();
 	createAccountScreen->hide();
 	loginScreen->display();
 }
