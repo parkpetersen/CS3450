@@ -1,5 +1,5 @@
-#ifndef LOGIN_H
-#define LOGIN_H
+#ifndef LOGIN_HPP
+#define LOGIN_HPP
 
 #include <wx/wx.h>
 
@@ -13,6 +13,13 @@ public:
 	login(wxFrame* parent);
 	void display();
 	void hide();
+	void getInput();
+	wxFlexGridSizer *verticalBox;
+	wxBoxSizer *horizontalBox;
+	wxBoxSizer *horizontalBoxTwo;
+
+	wxTextCtrl *userNameTxt;
+	wxTextCtrl *passwordTxt;
 	//void onCreate(wxCommandEvent& event);
 	//~login();
 
