@@ -81,11 +81,6 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
 
-	//p1Hand[2]->Hide();
-	//horizontalBoxMid->Remove(2);
-	//centerPile[2]->Hide();
-	//horizontalBoxCenter->Remove(2);
-	//horizontalBoxCenter->Add(p1Hand[2], wxCENTER, 0);
 
 	SetSizerAndFit(verticalBoxMain);
 
@@ -107,12 +102,14 @@ void HeartsBoard::hide()
 
 void HeartsBoard::cardClick(int i)
 {
-	//We need to make it so the player can only put one card into the middle so we don't go over four cards in the middle.
-	p1Hand[i]->Hide();
-	horizontalBoxBtm->Detach(p1Hand[i]);
-	horizontalBoxCenter->Add(p1Hand[i], wxCENTER, 50);
-	horizontalBoxCenter->Layout();
-	horizontalBoxBtm->Layout();
-	p1Hand[i]->Show();
+	if (horizontalBoxCenter->GetItemCount() < 4)
+	{
+		p1Hand[i]->Hide();
+		horizontalBoxBtm->Detach(p1Hand[i]);
+		horizontalBoxCenter->Add(p1Hand[i], wxCENTER, 50);
+		horizontalBoxCenter->Layout();
+		horizontalBoxBtm->Layout();
+		p1Hand[i]->Show();
+	}
 
 }
