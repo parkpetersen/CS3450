@@ -11,8 +11,8 @@ HeartsBoard.hpp
 HeartsBoard.cpp
 LoginScreen.hpp
 LoginScreen.cpp
-PlayModeScreen.cpp
 PlayModeScreen.hpp
+PlayModeScreen.cpp
 )
 target_link_libraries(client ${externLibs})
 target_include_directories(client ${externIncs})

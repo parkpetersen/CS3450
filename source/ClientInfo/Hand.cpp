@@ -7,7 +7,7 @@
 
 void Hand::organizeHand(std::vector<Card>& userHand)
 {
-  std::sort(userHand.begin(), userHand.end());
+  //std::sort(userHand.begin(), userHand.end());
 }
 
 bool Hand::isEmpty()
