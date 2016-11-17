@@ -15,19 +15,17 @@ bool Hand::isEmpty()
   return this->userHand.empty();
 }
 
-std::shared_ptr<Card> Hand::playCard(Suit s, Value v)
+Card Hand::playCard(Suit s, Value v)
 {
   auto it = userHand.begin();
   for (auto&& c : this->userHand)
   {
-    if (c->getSuit() == s && c->getValue() == v)
+    if (c.getSuit() == s && c.getValue() == v)
     {
-      std::shared_ptr<Card> returnedCard = c;
+      Card returnedCard = c;
       userHand.erase(it);
       return returnedCard;
     }
     ++it;
   }
-
-  return nullptr;
 }
