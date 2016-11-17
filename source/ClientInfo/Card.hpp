@@ -41,3 +41,5 @@ public:
   Value getValue() const;
   Card(Suit s, Value v);
 };
+
+bool operator<(const Card& card, const Card& otherCard);

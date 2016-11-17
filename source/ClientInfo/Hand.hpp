@@ -2,13 +2,13 @@
 #include "Card.hpp"
 
 // Standard Includes
-#include <vector>
 #include <memory>
+#include <vector>
 
 class Hand
 {
 private:
-  std::vector<std::shared_ptr<Card>> userHand;
+  std::vector<Card> userHand;
 
 public:
   /*Rearranges the users hand to be in order of suit and value*/
@@ -20,5 +20,5 @@ public:
   /*Removes the card from the users Hand and plays it in the
    *center
    */
-  std::shared_ptr<Card> playCard(Suit s, Value v);
+  Card playCard(Suit s, Value v);
 };
