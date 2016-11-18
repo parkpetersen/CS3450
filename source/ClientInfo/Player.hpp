@@ -16,7 +16,7 @@ private:
 
 public:
   std::vector<Card> playerHand;
-  //void playCard(std::unique_ptr<Card>);
+  void playCard(std::unique_ptr<Card>);
   void insertCardToHand(Card card);
 };
 

@@ -29,21 +29,21 @@ Value Card::getValue()
   return this->value;
 }
 
-//bool operator<(const Card& card, const Card& otherCard)
-//{
-//  if (card.getSuit() < otherCard.getSuit())
-//  {
-//    return true;
-//  }
-//  else if (card.getSuit() > otherCard.getSuit())
-//  {
-//    return false;
-//  }
-//  else
-//  {
-//    return card.getValue() < otherCard.getValue();
-//  }
-//}
+bool operator<(Card& card, Card& otherCard)
+{
+  if (card.getSuit() < otherCard.getSuit())
+  {
+    return true;
+  }
+  else if (card.getSuit() > otherCard.getSuit())
+  {
+    return false;
+  }
+  else
+  {
+    return card.getValue() < otherCard.getValue();
+  }
+}
 
 std::string Card::getImagePath()
 {

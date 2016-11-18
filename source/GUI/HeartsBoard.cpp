@@ -43,7 +43,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 	for (int i = 0; i < 13; i++)
 	{
-		
+		//This isn't needed but I'm going to leave it here for now just for reference.
 		//cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
 		//p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
 		//pc = p1Cards[i].ConvertToImage();
@@ -112,7 +112,7 @@ void HeartsBoard::hide()
 
 void HeartsBoard::cardClick(int i)
 {
-	if (horizontalBoxCenter->GetItemCount() < 4)
+	if (turn == 0 && horizontalBoxCenter->GetItemCount() < 4)
 	{
 		p1Hand[i]->Hide();
 		horizontalBoxBtm->Detach(p1Hand[i]);
