@@ -1,6 +1,8 @@
 #include <wx/wx.h>
 #include <wx/sizer.h>
 #include "HeartsBoard.hpp"
+#include <random>
+
 
 HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
@@ -42,11 +44,11 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	for (int i = 0; i < 13; i++)
 	{
 		
-		cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
-		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
-		pc = p1Cards[i].ConvertToImage();
-		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
-		p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
+		//cardNum = "../../../../CS3450/Resources/cards/" + std::to_string(i + 1) + "c.png";
+		//p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
+		//pc = p1Cards[i].ConvertToImage();
+		//p1Cards[i] = wxBitmap(pc.Scale(63, 91));
+		//p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
 
 		p2Cards[i] = wxBitmap(pcs.Scale(72, 50));
 		p2Hand[i] = new wxBitmapButton(this, BUTTON_CARD_OTHER, p2Cards[i], wxDefaultPosition, wxSize(72, 25), 0);
@@ -59,7 +61,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 
 		//Add bitmap buttons to the sizers
-		horizontalBoxBtm->Add(p1Hand[i], wxCENTER, 0);
+		//horizontalBoxBtm->Add(p1Hand[i], wxCENTER, 0);
 		verticalBoxLeft->Add(p2Hand[i], wxCENTER, 0);
 		verticalBoxRight->Add(p4Hand[i], wxCENTER, 0);
 		horizontalBoxTop->Add(p3Hand[i], wxCENTER, 0);
@@ -79,7 +81,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 50);
 	verticalBoxMain->Add(horizontalBoxTop, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
-	verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
+	//verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
 
 
 	SetSizerAndFit(verticalBoxMain);
@@ -92,6 +94,14 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 void HeartsBoard::display()
 {
 	Show(1);
+	Player player1, player2, player3, player4;
+	std::vector<Player> playerVect;
+	playerVect.push_back(player1);
+	playerVect.push_back(player2);
+	playerVect.push_back(player3);
+	playerVect.push_back(player4);
+
+	heartsPlay(playerVect);
 
 }
 
@@ -111,5 +121,78 @@ void HeartsBoard::cardClick(int i)
 		horizontalBoxBtm->Layout();
 		p1Hand[i]->Show();
 	}
+
+}
+
+void HeartsBoard::heartsPlay(std::vector<Player> players)
+{
+	//this if will probably need to be while, i put it to if for testing purposes
+	if (p1Score < 100 && p2Score < 100 && p3Score < 100 && p4Score < 100)
+	{
+		std::vector<Card> deck = initializeDeck();
+		std::random_device rd;
+		std::mt19937 generator(rd());
+		std::shuffle(deck.begin(), deck.end(), generator);
+		for (size_t i = 0; i < players.size(); i++)
+		{
+			for (auto j = 0; j < 13; j++)
+			{
+				players[i].insertCardToHand(deck[(j)+(13 * i)]);
+			}
+		}
+
+		for (int i = 0; i < 13; i++)
+		{
+			std::cout << players[0].playerHand[i].getValue() + ' ' + players[0].playerHand[i].getSuit()<<std::endl;
+		}
+		displayHand(players[0].playerHand);
+	}
+
+}
+
+	//check for 2 of clubs
+	//determines who is first
+	//playerTurn and CPUTurn functions while score < 100
+	//check move
+
+
+std::vector<Card> HeartsBoard::initializeDeck()
+{
+	std::vector<Card> deck;
+	deck.reserve(52);
+	std::vector<Suit> suits = { HEARTS, SPADES, CLUBS, DIAMONDS };
+	for (auto&& suit : suits)
+	{
+		for (int i = 2; i <= 14; i++)
+		{
+			deck.push_back(Card(suit, (Value)i));
+		}
+	}
+	return deck;
+}
+
+void HeartsBoard::displayHand(std::vector<Card> playerHand)
+{
+	std::string cardNum;
+	wxImage pc;
+	//horizontalBoxBtm->Clear();
+	for (int i = 0; i < 13; i++)
+	{
+		cardNum = playerHand[i].getImagePath();
+		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
+		pc = p1Cards[i].ConvertToImage();
+		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
+		p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
+		//horizontalBoxBtm->Clear();
+		horizontalBoxBtm->Add(p1Hand[i], wxCENTER, 0);
+	}
+
+	verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
+	SetSizerAndFit(verticalBoxMain);
+
+	CenterOnParent();
+
+	
+
 
 }
