@@ -1,5 +1,5 @@
-#ifndef GAMEOVER_H
-#define GAMEOVER_H
+#ifndef GAMEOVER_HPP
+#define GAMEOVER_HPP
 
 #include <wx/wx.h>
 
@@ -17,7 +17,7 @@ public:
 
 enum
 {
-	BUTTON_mainMenu = wxID_HIGHEST + 7,
-	BUTTON_playAgain = wxID_HIGHEST + 9
+	BUTTON_mainMenu = wxID_HIGHEST + 10,
+	BUTTON_playAgain = wxID_HIGHEST + 11
 };
 #endif
