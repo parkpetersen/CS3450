@@ -65,15 +65,15 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 		verticalBoxLeft->Add(p2Hand[i], wxCENTER, 0);
 		verticalBoxRight->Add(p4Hand[i], wxCENTER, 0);
 		horizontalBoxTop->Add(p3Hand[i], wxCENTER, 0);
-		
+
 
 	}
-	
+
 
 	//Generate the center pile (need to fix the size issue)
 	/*for (int i = 0; i < 4; i++) {
-		centerPile[i] = new wxBitmapButton(this, BUTTON_CARD_CENTER + i, defaultColor, wxDefaultPosition, wxSize(63, 91), 0);
-		horizontalBoxCenter->Add(centerPile[i], wxCENTER, 0);
+	centerPile[i] = new wxBitmapButton(this, BUTTON_CARD_CENTER + i, defaultColor, wxDefaultPosition, wxSize(63, 91), 0);
+	horizontalBoxCenter->Add(centerPile[i], wxCENTER, 0);
 	}*/
 
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
@@ -87,7 +87,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	SetSizerAndFit(verticalBoxMain);
 
 	CenterOnParent();
-	Show(0); 
+	Show(0);
 
 }
 
@@ -95,13 +95,11 @@ void HeartsBoard::display()
 {
 	Show(1);
 	Player player1, player2, player3, player4;
-	std::vector<Player> playerVect;
-	playerVect.push_back(player1);
-	playerVect.push_back(player2);
-	playerVect.push_back(player3);
-	playerVect.push_back(player4);
-
-	heartsPlay(playerVect);
+	players.push_back(player1);
+	players.push_back(player2);
+	players.push_back(player3);
+	players.push_back(player4);
+	heartsPlay();
 
 }
 
@@ -110,21 +108,36 @@ void HeartsBoard::hide()
 	Show(0);
 }
 
-void HeartsBoard::cardClick(int i)
+int HeartsBoard::cardClick(int i)
 {
-	if (turn == 0 && horizontalBoxCenter->GetItemCount() < 4)
+	if (cardPass == true)
 	{
-		p1Hand[i]->Hide();
-		horizontalBoxBtm->Detach(p1Hand[i]);
-		horizontalBoxCenter->Add(p1Hand[i], wxCENTER, 50);
-		horizontalBoxCenter->Layout();
-		horizontalBoxBtm->Layout();
-		p1Hand[i]->Show();
+		std::cout << i << std::endl;
+		p1PassCardsIndices.push_back(i);
+		if (p1PassCardsIndices.size() == 3)
+		{
+			passCards();
+		}
+
+	}
+
+	else
+	{
+		if (horizontalBoxCenter->GetItemCount() < 4)
+		{
+			p1Hand[i]->Hide();
+			horizontalBoxBtm->Detach(p1Hand[i]);
+			horizontalBoxCenter->Add(p1Hand[i], wxCENTER, 50);
+			horizontalBoxCenter->Layout();
+			horizontalBoxBtm->Layout();
+			p1Hand[i]->Show();
+			return i;
+		}
 	}
 
 }
 
-void HeartsBoard::heartsPlay(std::vector<Player> players)
+void HeartsBoard::heartsPlay()
 {
 	//this if will probably need to be while, i put it to if for testing purposes
 	if (p1Score < 100 && p2Score < 100 && p3Score < 100 && p4Score < 100)
@@ -143,17 +156,19 @@ void HeartsBoard::heartsPlay(std::vector<Player> players)
 
 		for (int i = 0; i < 13; i++)
 		{
-			std::cout << players[0].playerHand[i].getValue() + ' ' + players[0].playerHand[i].getSuit()<<std::endl;
+			std::cout << players[0].playerHand[i].getValue() << ' ' << players[0].playerHand[i].getSuit() << std::endl;
 		}
 		displayHand(players[0].playerHand);
+		cardPass = true;
+
 	}
 
 }
 
-	//check for 2 of clubs
-	//determines who is first
-	//playerTurn and CPUTurn functions while score < 100
-	//check move
+//check for 2 of clubs
+//determines who is first
+//playerTurn and CPUTurn functions while score < 100
+//check move
 
 
 std::vector<Card> HeartsBoard::initializeDeck()
@@ -175,7 +190,8 @@ void HeartsBoard::displayHand(std::vector<Card> playerHand)
 {
 	std::string cardNum;
 	wxImage pc;
-	//horizontalBoxBtm->Clear();
+	horizontalBoxBtm->Clear();
+	horizontalBoxBtm->Layout();
 	for (int i = 0; i < 13; i++)
 	{
 		cardNum = playerHand[i].getImagePath();
@@ -183,7 +199,6 @@ void HeartsBoard::displayHand(std::vector<Card> playerHand)
 		pc = p1Cards[i].ConvertToImage();
 		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
 		p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
-		//horizontalBoxBtm->Clear();
 		horizontalBoxBtm->Add(p1Hand[i], wxCENTER, 0);
 	}
 
@@ -191,8 +206,41 @@ void HeartsBoard::displayHand(std::vector<Card> playerHand)
 	SetSizerAndFit(verticalBoxMain);
 
 	CenterOnParent();
+}
 
-	
+void HeartsBoard::passCards()
+{
+	std::cout << p1PassCardsIndices[0] << std::endl;
+	std::cout << p1PassCardsIndices[1] << std::endl;
+	std::cout << p1PassCardsIndices[2] << std::endl;
+
+	std::iter_swap(players[0].playerHand.begin() + p1PassCardsIndices[0], players[(round + 1) % 4].playerHand.begin());
+	std::iter_swap(players[0].playerHand.begin() + p1PassCardsIndices[1], players[(round + 1) % 4].playerHand.begin() + 1);
+	std::iter_swap(players[0].playerHand.begin() + p1PassCardsIndices[2], players[(round + 1) % 4].playerHand.begin() + 2);
+
+	horizontalBoxBtm->Detach(p1Hand[p1PassCardsIndices[0]]);
+	horizontalBoxBtm->Detach(p1Hand[p1PassCardsIndices[1]]);
+	horizontalBoxBtm->Detach(p1Hand[p1PassCardsIndices[2]]);
+
+	for (int i = 0; i < 13; i++)
+	{
+		p1Hand[i]->Destroy();
+
+
+	}
+	verticalBoxMain->Detach(horizontalBoxBtm);
+	SetSizerAndFit(verticalBoxMain);
+
+	cardsToPass.clear();
+	p1PassCardsIndices.clear();
+	cardPass = false;
+	for (int i = 0; i < 13; i++)
+	{
+		std::cout << players[0].playerHand[i].getValue() << ' ' << players[0].playerHand[i].getSuit() << std::endl;
+	}
+	displayHand(players[0].playerHand);
+
+
 
 
 }

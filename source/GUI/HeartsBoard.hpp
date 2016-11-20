@@ -10,10 +10,14 @@ class HeartsBoard : public wxPanel
 {
 public:
 	HeartsBoard(wxFrame* parent);
-
+	std::vector<Player> players;
 	int turn;
+	int round = 0;
 	int p1Score, p2Score, p3Score, p4Score;
 	int p1RoundScore, p2RoundScore, p4RoundScore;
+	bool cardPass = false;
+	std::vector<Card> cardsToPass;
+	std::vector<int> p1PassCardsIndices;
 
 	//sizers
 	wxFlexGridSizer *verticalBoxMain;
@@ -25,7 +29,7 @@ public:
 	wxBoxSizer *verticalBoxRight;
 	wxFlexGridSizer *horizontalBoxCenter;
 
-	
+
 	//Bitmap images (should be vectors)
 	wxBitmap p1Cards[13];
 	wxBitmap p2Cards[13];
@@ -42,10 +46,11 @@ public:
 
 	void display();
 	void hide();
-	void cardClick(int i);
-	void heartsPlay(std::vector<Player>);
+	int cardClick(int i);
+	void heartsPlay();
 	std::vector<Card> initializeDeck();
 	void displayHand(std::vector<Card>);
+	void passCards();
 };
 
 enum
