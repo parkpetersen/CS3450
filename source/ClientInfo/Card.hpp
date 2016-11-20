@@ -1,3 +1,8 @@
+#ifndef CARD_HPP
+#define CARD_HPP
+
+#include <string>
+
 
 enum Suit
 {
@@ -35,9 +40,13 @@ class Card
 private:
   Suit suit;
   Value value;
+  std::string imagePath;
 
 public:
-  Suit getSuit() const;
-  Value getValue() const;
+  Suit getSuit();
+  Value getValue();
+  std::string getImagePath();
   Card(Suit s, Value v);
 };
+
+#endif

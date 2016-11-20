@@ -2,6 +2,7 @@
 #define HEARTSBOARD_HPP
 
 #include <wx/wx.h>
+<<<<<<< HEAD
 #include <vector>
 #include <source/ClientInfo/Player.hpp>
 //#include <source/HeartsLogic/HeartsGame.hpp>
@@ -11,6 +12,10 @@ class HeartsBoard : public wxPanel
 {
 public:
 	HeartsBoard(wxFrame* parent);
+
+	int turn;
+	int p1Score, p2Score, p3Score, p4Score;
+	int p1RoundScore, p2RoundScore, p4RoundScore;
 
 	//sizers
 	wxFlexGridSizer *verticalBoxMain;
@@ -40,7 +45,9 @@ public:
 	void display();
 	void hide();
 	void cardClick(int i);
-
+	void heartsPlay(std::vector<Player>);
+	std::vector<Card> initializeDeck();
+	void displayHand(std::vector<Card>);
 };
 
 enum
