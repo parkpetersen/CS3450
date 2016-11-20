@@ -45,7 +45,8 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 		p1Cards[i].LoadFile(cardNum, wxBITMAP_TYPE_PNG);
 		pc = p1Cards[i].ConvertToImage();
 		p1Cards[i] = wxBitmap(pc.Scale(63, 91));
-		p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), 0);
+		//My attempt to make the card image appear "overlapped" but...wxBU_LEFT didn't do what I had hoped
+		p1Hand[i] = new wxBitmapButton(this, BUTTON_CARD1 + i, p1Cards[i], wxDefaultPosition, wxSize(63, 91), wxBU_LEFT);
 
 		p2Cards[i] = wxBitmap(pcs.Scale(72, 50));
 		p2Hand[i] = new wxBitmapButton(this, BUTTON_CARD_OTHER, p2Cards[i], wxDefaultPosition, wxSize(72, 25), 0);

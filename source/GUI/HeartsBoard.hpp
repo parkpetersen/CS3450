@@ -3,6 +3,8 @@
 
 #include <wx/wx.h>
 #include <vector>
+#include <source/ClientInfo/Player.hpp>
+//#include <source/HeartsLogic/HeartsGame.hpp>
 
 
 class HeartsBoard : public wxPanel
