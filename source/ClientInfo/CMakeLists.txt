@@ -4,8 +4,6 @@ include_directories(${externIncs} ${CMAKE_SOURCE_DIR})
 set(Client_srcs
 Card.cpp
 Card.hpp
-Deck.cpp
-Deck.hpp
 Player.cpp
 Player.hpp)
 source_group(Client_Info FILES ${Client_srcs})
