@@ -43,6 +43,7 @@ private:
   std::string imagePath;
 
 public:
+	void setSuit(Suit);
   Suit getSuit();
   Value getValue();
   std::string getImagePath();

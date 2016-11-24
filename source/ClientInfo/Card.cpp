@@ -19,6 +19,11 @@ Card::Card(Suit s, Value v)
 		this->imagePath = "../../../../CS3450/Resources/cards/" + std::to_string(v) + "d.png";
 }
 
+void Card::setSuit(Suit newSuit)
+{
+	this->suit = newSuit;
+}
+
 Suit Card::getSuit()
 {
   return this->suit;

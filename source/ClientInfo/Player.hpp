@@ -12,12 +12,14 @@
 class Player
 {
 private:
-  
+	int playerScore = 0;
 
 public:
+	void incrementScore(int i);
   std::vector<Card> playerHand;
   void playCard(std::unique_ptr<Card>);
   void insertCardToHand(Card card);
+  int getScore();
 };
 
 #endif
