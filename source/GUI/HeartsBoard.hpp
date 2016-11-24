@@ -20,8 +20,13 @@ public:
 	std::vector<Card> centerPile;
 	bool brokenHearts = false;
 
+	wxString player1Score;
+	wxString player2Score;
+	wxString player3Score;
+	wxString player4Score;
 
 	//sizers
+	wxGridSizer *gridBox;
 	wxFlexGridSizer *verticalBoxMain;
 	wxBoxSizer *horizontalBoxBtm;
 	wxBoxSizer *horizontalBoxMid;
@@ -62,6 +67,7 @@ public:
 	int computerTurn(int);
 	int endTurn(int currentPlayer);
 	void dealCards(std::vector<Card>& Deck);
+	void updateScoreBoard();
 };
 
 enum

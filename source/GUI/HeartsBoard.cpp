@@ -60,11 +60,16 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 
 	}
+	
 
 
+
+	gridBox = new wxGridSizer(2, 2, 3, 3);
+	
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
 	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
 	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 50);
+	horizontalBoxMid->Add(gridBox, wxALIGN_CENTER, 50);
 	verticalBoxMain->Add(horizontalBoxTop, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
 
@@ -142,6 +147,7 @@ void HeartsBoard::heartsPlay() //starts the game
 		dealCards(deck);
 		displayHand(players[0].playerHand);
 		cardPass = true;
+		updateScoreBoard();
 		wxMessageBox("Choose 3 cards to pass.", "Pass Cards", wxOK | wxICON_INFORMATION);
 
 	}
@@ -513,6 +519,7 @@ int HeartsBoard::endTurn(int currentPlayer)
 	players[(maxIndex + currentPlayer) % players.size()].incrementScore(
 		score);
 	centerPile.clear();
+	updateScoreBoard();
 	return (maxIndex + currentPlayer) % players.size();
 }
 
@@ -531,4 +538,31 @@ void HeartsBoard::dealCards(std::vector<Card>& Deck)
 			players[i].insertCardToHand(Deck[(j)+(13 * i)]);
 		}
 	}
+}
+
+void HeartsBoard::updateScoreBoard()
+{
+	wxString p1Score, p2Score, p3Score, p4Score;
+	p1Score << players[0].getScore();
+	p2Score << players[1].getScore();
+	p3Score << players[2].getScore();
+	p4Score << players[3].getScore();
+
+	player1Score = "You: " + p1Score;
+	player2Score = "Player 2 Score: " + p2Score;
+	player3Score = "Player 3 Score: " + p3Score;
+	player4Score = "Player 4 Score: " + p4Score;
+
+	gridBox->Clear();
+	
+	gridBox->Add(new wxStaticText(this, 0, player1Score, wxDefaultPosition,
+		wxSize(140, 30)), 1, wxCENTER, 0);
+	gridBox->Add(new wxStaticText(this, 0, player2Score, wxDefaultPosition,
+		wxSize(140, 30)), 1, wxCENTER, 0);
+	gridBox->Add(new wxStaticText(this, 0, player3Score, wxDefaultPosition,
+		wxSize(140, 30)), 1, wxCENTER, 0);
+	gridBox->Add(new wxStaticText(this, 0, player4Score, wxDefaultPosition,
+		wxSize(140, 30)), 1, wxCENTER, 0);
+	gridBox->Layout();
+	horizontalBoxMid->Layout();
 }
