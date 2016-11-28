@@ -2,6 +2,8 @@
 #define CREATEACCOUNT_HPP
 
 #include <wx/wx.h>
+#include <fstream>
+#include <string>
 
 
 class CreateAccount : public wxPanel
@@ -13,6 +15,7 @@ public:
 	void display();
 	void hide();
 	void getInput();
+	void makeAccount(std::string un, std::string pw);
 
 	wxTextCtrl *userNameTxt;
 	wxTextCtrl *passwordTxt;
