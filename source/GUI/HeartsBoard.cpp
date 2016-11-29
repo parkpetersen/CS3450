@@ -83,6 +83,11 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
 	//verticalBoxMain->Add(horizontalBoxBtm, wxCENTER, 0);
 
+	//p1Hand[2]->Hide();
+	//horizontalBoxMid->Remove(2);
+	//centerPile[2]->Hide();
+	//horizontalBoxCenter->Remove(2);
+	//horizontalBoxCenter->Add(p1Hand[2], wxCENTER, 0);
 
 	SetSizerAndFit(verticalBoxMain);
 
@@ -191,8 +196,5 @@ void HeartsBoard::displayHand(std::vector<Card> playerHand)
 	SetSizerAndFit(verticalBoxMain);
 
 	CenterOnParent();
-
-	
-
 
 }

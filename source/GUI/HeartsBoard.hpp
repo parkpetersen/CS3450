@@ -2,10 +2,9 @@
 #define HEARTSBOARD_HPP
 
 #include <wx/wx.h>
-<<<<<<< HEAD
 #include <vector>
 #include <source/ClientInfo/Player.hpp>
-//#include <source/HeartsLogic/HeartsGame.hpp>
+#include <source/HeartsLogic/HeartsGame.hpp>
 
 
 class HeartsBoard : public wxPanel

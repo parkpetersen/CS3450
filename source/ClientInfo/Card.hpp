@@ -50,3 +50,6 @@ public:
 };
 
 #endif
+
+bool operator<(const Card& card, const Card& otherCard);
+
