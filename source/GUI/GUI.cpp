@@ -1,4 +1,3 @@
-// wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
 #include "PlayModeScreen.hpp"
@@ -6,6 +5,7 @@
 #include "LoginScreen.hpp"
 #include "CreateAccount.hpp"
 #include "HeartsBoard.hpp"
+#include "SpadesBoard.hpp"
 
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -24,6 +24,7 @@ public:
   PlayModeScreen *modeScreen;
   HeartsBoard *heartsBoard;
   GameOver *gameOver;
+  SpadesBoard *spadesBoard;
 
 private:
   void OnHello(wxCommandEvent& event);
@@ -53,6 +54,20 @@ private:
   void OnCard10(wxCommandEvent& event);
   void OnCard11(wxCommandEvent& event);
   void OnCard12(wxCommandEvent& event);
+  void OnCard0_SPADES(wxCommandEvent& event);
+  void OnCard1_SPADES(wxCommandEvent& event);
+  void OnCard2_SPADES(wxCommandEvent& event);
+  void OnCard3_SPADES(wxCommandEvent& event);
+  void OnCard4_SPADES(wxCommandEvent& event);
+  void OnCard5_SPADES(wxCommandEvent& event);
+  void OnCard6_SPADES(wxCommandEvent& event);
+  void OnCard7_SPADES(wxCommandEvent& event);
+  void OnCard8_SPADES(wxCommandEvent& event);
+  void OnCard9_SPADES(wxCommandEvent& event);
+  void OnCard10_SPADES(wxCommandEvent& event);
+  void OnCard11_SPADES(wxCommandEvent& event);
+  void OnCard12_SPADES(wxCommandEvent& event);
+  void OnBid(wxCommandEvent& event);
 
   wxDECLARE_EVENT_TABLE();
 };
@@ -90,6 +105,21 @@ EVT_BUTTON(BUTTON_CARD1 + 9, MyFrame::OnCard9)
 EVT_BUTTON(BUTTON_CARD1 + 10, MyFrame::OnCard10)
 EVT_BUTTON(BUTTON_CARD1 + 11, MyFrame::OnCard11)
 EVT_BUTTON(BUTTON_CARD1 + 12, MyFrame::OnCard12)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 0, MyFrame::OnCard0_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 1, MyFrame::OnCard1_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 2, MyFrame::OnCard2_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 3, MyFrame::OnCard3_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 4, MyFrame::OnCard4_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 5, MyFrame::OnCard5_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 6, MyFrame::OnCard6_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 7, MyFrame::OnCard7_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 8, MyFrame::OnCard8_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 9, MyFrame::OnCard9_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 10, MyFrame::OnCard10_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 11, MyFrame::OnCard11_SPADES)
+EVT_BUTTON(BUTTON_CARD1_SPADES + 12, MyFrame::OnCard12_SPADES)
+EVT_BUTTON(BUTTON_BID, MyFrame::OnBid)
+
 
 //EVT_BUTTON(BUTTON_CARD_OTHER, MyFrame::OnHearts)
 
@@ -124,6 +154,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   modeScreen = new PlayModeScreen(this);
   heartsBoard = new HeartsBoard(this);
   gameOver = new GameOver(this);
+  spadesBoard = new SpadesBoard(this);
   loginScreen->display();
 
 
@@ -184,7 +215,7 @@ void MyFrame::OnHearts(wxCommandEvent& event)
 void MyFrame::OnSpades(wxCommandEvent& event)
 {
 	modeScreen->hide();
-	gameOver->display();
+	spadesBoard->display();
 }
 
 void MyFrame::OnTest(wxCommandEvent& event)
@@ -292,6 +323,100 @@ void MyFrame::OnCard12(wxCommandEvent & event)
 	int i = 12;
 	heartsBoard->cardClick(i);
 
+}
+
+void MyFrame::OnCard0_SPADES(wxCommandEvent & event)
+{
+	int i = 0;
+	spadesBoard->cardClick(i);
+}
+
+void MyFrame::OnCard1_SPADES(wxCommandEvent & event)
+{
+	int i = 1;
+	spadesBoard->cardClick(i);
+}
+
+void MyFrame::OnCard2_SPADES(wxCommandEvent & event)
+{
+	int i = 2;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard3_SPADES(wxCommandEvent & event)
+{
+	int i = 3;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard4_SPADES(wxCommandEvent & event)
+{
+	int i = 4;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard5_SPADES(wxCommandEvent & event)
+{
+	int i = 5;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard6_SPADES(wxCommandEvent & event)
+{
+	int i = 6;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard7_SPADES(wxCommandEvent & event)
+{
+	int i = 7;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard8_SPADES(wxCommandEvent & event)
+{
+	int i = 8;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard9_SPADES(wxCommandEvent & event)
+{
+	int i = 9;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard10_SPADES(wxCommandEvent & event)
+{
+	int i = 10;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard11_SPADES(wxCommandEvent & event)
+{
+	int i = 11;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnCard12_SPADES(wxCommandEvent & event)
+{
+	int i = 12;
+	spadesBoard->cardClick(i);
+
+}
+
+void MyFrame::OnBid(wxCommandEvent & event)
+{
+	spadesBoard->onBidButton();
 }
 
 

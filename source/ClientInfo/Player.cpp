@@ -16,6 +16,31 @@ int Player::getScore()
 	return this->playerScore;
 }
 
+int Player::getBid() const
+{
+	return this->bid;
+}
+
+void Player::setBid(int inputBid)
+{
+	this->bid = inputBid;
+}
+
+int Player::getBags() const
+{
+	return this->bags;
+}
+
+int Player::getTricksWon() const
+{
+	return this->tricksWon;
+}
+
+void Player::incrementTricksWon()
+{
+	this->tricksWon++;
+}
+
 void Player::incrementScore(int i)
 {
 	playerScore += i;

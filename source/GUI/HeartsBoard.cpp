@@ -359,6 +359,7 @@ bool HeartsBoard::validateMove(int index, Card move, int numTrick, int turn)
 //this function is the main gameplay function and takes care of the computer's turns.
 void HeartsBoard::takeTurn()
 {
+
 	for (int i = 0; i < players.size(); i++)
 	{
 		std::cout << "Player " << i << " score: " << players[i].getScore() << std::endl;
@@ -422,6 +423,7 @@ void HeartsBoard::takeTurn()
 		horizontalBoxCenter->Layout();
 		if (centerPile.size() < 4)
 		{
+			wxSleep(.90);
 			takeTurn();
 		}
 	}
