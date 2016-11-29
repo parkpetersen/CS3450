@@ -2,7 +2,8 @@
 #define LOGIN_HPP
 
 #include <wx/wx.h>
-
+#include <string>
+#include <fstream>
 
 class login : public wxPanel
 {
@@ -13,7 +14,8 @@ public:
 	login(wxFrame* parent);
 	void display();
 	void hide();
-	void getInput();
+	bool getInput();
+	bool checkLogin(std::string un, std::string pw);
 	wxFlexGridSizer *verticalBox;
 	wxBoxSizer *horizontalBox;
 	wxBoxSizer *horizontalBoxTwo;

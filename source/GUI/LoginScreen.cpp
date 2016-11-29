@@ -1,7 +1,6 @@
 #include <wx/wx.h>
 #include <wx/sizer.h>
 #include "LoginScreen.hpp"
-#include <string>
 
 login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
@@ -52,14 +51,44 @@ void login::hide()
 	Show(0);
 }
 
-void login::getInput()
+bool login::getInput()
 {
 	std::string username;
 	std::string password;
 	username = userNameTxt->GetLineText(0);
 	password = passwordTxt->GetLineText(0);
-	std::cout<<username<<std::endl;
-	std::cout << password<<std::endl;
-	
+	std::cout << username << std::endl;
+	std::cout << password << std::endl;
+	if (checkLogin(username, password))
+	{
+		std::cout << "Correct Login!\n";
+		return true;
+	}
+	else
+	{
+		std::cout << "Bad Login\n";
+		wxMessageBox(wxT("Incorrect login information. Please try again"), wxT("Login Error"), wxICON_ERROR);
+		return false;
+	}
 
+}
+
+bool login::checkLogin(std::string un, std::string pw)
+{
+	//std::ifstream read("C:\\Users\\dozek\\Desktop\\" + un + ".txt");
+	std::ifstream read("../../../../CS3450/Resources/data/" + un + ".txt");
+	std::string username;
+	std::string password;
+
+	std::getline(read, username);
+	std::getline(read, password);
+
+	if (username == un && password == pw)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

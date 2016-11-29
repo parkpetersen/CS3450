@@ -2,6 +2,7 @@
 #include <wx/sizer.h>
 #include "CreateAccount.hpp"
 
+
 CreateAccount::CreateAccount(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
 {
@@ -53,5 +54,41 @@ void CreateAccount::getInput()
 	password = passwordTxt->GetLineText(0);
 	std::cout << username << std::endl;
 	std::cout << password << std::endl;
+	makeAccount(username, password);
+}
+
+void CreateAccount::makeAccount(std::string un, std::string pw)
+{
+	//Registers an account with the entered username and password
+	//Currently uses a relative path for the login info. Is there a better approach?
+	std::ofstream file;
+	if (!std::ifstream("../../../../CS3450/Resources/data/" + un + ".txt"))
+	{
+		file.open("../../../../CS3450/Resources/data/" + un + ".txt");
+		file << un << std::endl << pw << std::endl;
+		file << "Hearts Win/Lose\n" << "0" << std::endl << "0" << std::endl;
+		file << "Spades Win/Lose\n" << "0" << std::endl << "0" << std::endl;
+		file << "Overall Win/Lose\n" << "0" << std::endl << "0" << std::endl;
+		file.close();
+		std::cout << "Account was created\n";
+	}
+	else
+	{
+		std::cout << "Account already exists\n";
+	}
+
+	/*Note: the format for account files is:
+	*  Username
+	*  Password
+	*  Hearts Win/Lose: (Subtitle)
+	*  Win value
+	*  Lose value
+	*  Spades Win/Lose: (Subtitle)
+	*  Win value
+	*  Lose value
+	*  Overall Win/Lose: (Subtitle)
+	*  Win value
+	*  Lose Value
+	*/
 
 }

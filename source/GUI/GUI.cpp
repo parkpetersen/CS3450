@@ -1,5 +1,7 @@
+// wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
+
 #include "PlayModeScreen.hpp"
 #include "GameOver.hpp"
 #include "LoginScreen.hpp"
@@ -195,9 +197,11 @@ void MyFrame::OnCreateNewProfile(wxCommandEvent& event)
 
 void MyFrame::OnLogin(wxCommandEvent& event)
 {
-	loginScreen->hide();
-	loginScreen->getInput();
-	modeScreen->display();
+	if (loginScreen->getInput())
+	{
+		loginScreen->hide();
+		modeScreen->display();
+	}
 }
 
 void MyFrame::OnModeCancel(wxCommandEvent& event)
