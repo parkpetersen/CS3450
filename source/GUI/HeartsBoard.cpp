@@ -148,6 +148,14 @@ void HeartsBoard::heartsPlay() //starts the game
 		displayHand(players[0].playerHand);
 		cardPass = true;
 		updateScoreBoard();
+		for (int i = 0; i < 4; i++)
+		{
+			std::cout << "Player " << i << "hand." << std::endl;
+			for (int j = 0; j < 13; j++)
+			{
+				std::cout << players[i].playerHand[j].getValue() << " " << players[i].playerHand[j].getSuit() << std::endl;
+			}
+		}
 		wxMessageBox("Choose 3 cards to pass.", "Pass Cards", wxOK | wxICON_INFORMATION);
 
 	}
@@ -515,7 +523,7 @@ int HeartsBoard::endTurn(int currentPlayer)
 			maxValue = tmp.getValue();
 			maxIndex = i;
 		}
-		if (tmp.getSuit() == SPADES && tmp.getValue() == 11) score += 13;
+		if (tmp.getSuit() == SPADES && tmp.getValue() == 12) score += 13;
 		if (tmp.getSuit() == HEARTS) score++;
 	}
 	players[(maxIndex + currentPlayer) % players.size()].incrementScore(
