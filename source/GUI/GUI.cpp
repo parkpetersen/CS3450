@@ -102,7 +102,7 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
 
-  MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(850, 700));
+  MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(1000, 700));
   frame->SetBackgroundColour(wxColour(40,150,40));
   
   frame->Show(true);

@@ -29,12 +29,13 @@ public:
 	wxGridSizer *gridBox;
 	wxFlexGridSizer *verticalBoxMain;
 	wxBoxSizer *horizontalBoxBtm;
-	wxBoxSizer *horizontalBoxMid;
+	wxFlexGridSizer *horizontalBoxMid;
 	wxBoxSizer *horizontalBoxTop;
 	wxBoxSizer *verticalBoxLeft;
 	wxBoxSizer *verticalBoxCenter;
 	wxBoxSizer *verticalBoxRight;
 	wxFlexGridSizer *horizontalBoxCenter;
+	wxFlexGridSizer *horizontalBoxMiddle;
 
 
 	//Bitmap images (should be vectors)
