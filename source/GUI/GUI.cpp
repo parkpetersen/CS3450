@@ -27,6 +27,7 @@ public:
   HeartsBoard *heartsBoard;
   GameOver *gameOver;
   SpadesBoard *spadesBoard;
+  std::string introMessage = "Welcome to Deal52, please log in.";
 
 private:
   void OnHello(wxCommandEvent& event);
@@ -129,7 +130,7 @@ wxEND_EVENT_TABLE()
 IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
-  MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(850, 700));
+  MyFrame *frame = new MyFrame("Card Games", wxPoint(50, 50), wxSize(1000, 700));
   frame->SetBackgroundColour(wxColour(40,150,40));
   
   frame->Show(true);
@@ -139,7 +140,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
   wxMenu *menuFile = new wxMenu;
-  menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
+  menuFile->Append(ID_Hello, "&Player Statistics...\tCtrl-H",
     "Welcome to Deal 52!");
   menuFile->AppendSeparator();
   menuFile->Append(wxID_EXIT);
@@ -167,12 +168,13 @@ void MyFrame::OnExit(wxCommandEvent& event)
 }
 void MyFrame::OnAbout(wxCommandEvent& event)
 {
-  wxMessageBox("Choose between three of the funnest card games!",
+  wxMessageBox("Deal52 designed for CS3450 class\n\nCreated by Michael Kamerath, Parker Petersen,\n David Helmick, and Nic Biggs!",
     "About Deal 52", wxOK | wxICON_INFORMATION);
 }
 void MyFrame::OnHello(wxCommandEvent& event)
 {
-  wxLogMessage("Welcome to Deal 52!");
+	wxMessageBox(introMessage,
+		"Welcome to Deal52", wxOK | wxICON_INFORMATION);
 }
 
 void MyFrame::OnCreateAccount(wxCommandEvent& event)
@@ -199,6 +201,7 @@ void MyFrame::OnLogin(wxCommandEvent& event)
 {
 	if (loginScreen->getInput())
 	{
+		loginScreen->setLogin(introMessage);
 		loginScreen->hide();
 		modeScreen->display();
 	}
@@ -206,6 +209,7 @@ void MyFrame::OnLogin(wxCommandEvent& event)
 
 void MyFrame::OnModeCancel(wxCommandEvent& event)
 {
+	introMessage = "Welcome to Deal52, please log in.";
 	modeScreen->hide();
 	loginScreen->display();
 }

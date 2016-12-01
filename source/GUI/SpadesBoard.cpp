@@ -408,11 +408,6 @@ void SpadesBoard::onBidButton()
 void SpadesBoard::takeTurn()
 {
 
-	/*for (int i = 0; i < players.size(); i++)
-	{
-		std::cout << "Player " << i << " score: " << players[i].getScore() << std::endl;
-	}*/
-
 	if (players[0].getScore() >= 200 || players[1].getScore() >= 200 || players[2].getScore() >= 200 || players[3].getScore() >= 200) //checks if anyone has won.
 
 	{
@@ -429,6 +424,7 @@ void SpadesBoard::takeTurn()
 		std::string message = "Player " + std::to_string(highestIndex + 1) + " is the winner!";
 		wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
 		Hide();
+		
 		//we need to make it so when the game is over it will take you back to the game select screen.
 	}
 

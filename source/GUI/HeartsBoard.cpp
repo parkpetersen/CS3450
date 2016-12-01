@@ -10,13 +10,14 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	//Sizers
 	verticalBoxMain = new wxFlexGridSizer(3, 0, 20, 20);
 	horizontalBoxBtm = new wxBoxSizer(wxHORIZONTAL);
-	horizontalBoxMid = new wxBoxSizer(wxHORIZONTAL);
+	horizontalBoxMid = new wxFlexGridSizer(0, 3, 200, 200);
 	horizontalBoxTop = new wxBoxSizer(wxHORIZONTAL);
 	verticalBoxLeft = new wxBoxSizer(wxVERTICAL);
 	verticalBoxCenter = new wxBoxSizer(wxVERTICAL);
 	verticalBoxRight = new wxBoxSizer(wxVERTICAL);
 
 	horizontalBoxCenter = new wxFlexGridSizer(2, 2, 10, 10);
+	horizontalBoxMiddle = new wxFlexGridSizer(0, 2, 150, 150);
 
 	//Images used to scale the Bitmap
 	wxImage pc;
@@ -69,9 +70,10 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
 	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
 	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 50);
-	horizontalBoxMid->Add(gridBox, wxALIGN_CENTER, 50);
+	horizontalBoxMiddle->Add(horizontalBoxMid, wxALIGN_LEFT, 0);
+	horizontalBoxMiddle->Add(gridBox, wxALIGN_RIGHT, 0);
 	verticalBoxMain->Add(horizontalBoxTop, wxCENTER, 0);
-	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
+	verticalBoxMain->Add(horizontalBoxMiddle, wxCENTER, 0);
 
 
 	SetSizerAndFit(verticalBoxMain);
@@ -145,9 +147,12 @@ void HeartsBoard::heartsPlay() //starts the game
 		}
 		std::vector<Card> deck = initializeDeck();
 		dealCards(deck);
+		verticalBoxMain->Detach(horizontalBoxBtm);
+		SetSizerAndFit(verticalBoxMain);
+		updateScoreBoard();
 		displayHand(players[0].playerHand);
 		cardPass = true;
-		updateScoreBoard();
+		horizontalBoxMiddle->Layout();
 		for (int i = 0; i < 4; i++)
 		{
 			std::cout << "Player " << i << "hand." << std::endl;
