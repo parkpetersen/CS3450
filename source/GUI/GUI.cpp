@@ -147,13 +147,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
   wxMenu *menuFile = new wxMenu;
-<<<<<<< HEAD
   menuFile->Append(ID_Hello, "&Player Statistics...\tCtrl-H",
     "Welcome to Deal 52!");
-=======
-  menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
-    "Help string shown in status bar for this menu item");
->>>>>>> 89a12efffdeba7341b9397a3354858fe80c5b9ee
   menuFile->AppendSeparator();
   menuFile->Append(wxID_EXIT);
   wxMenu *menuHelp = new wxMenu;
