@@ -146,6 +146,7 @@ void SpadesBoard::spadesPlay() //starts the game
 		displayHand(players[0].playerHand);
 		bidMode= true;
 		makeBids();
+
 		updateScoreBoard();
 		wxMessageBox("Enter bid then click bid button.", "Bid", wxOK | wxICON_INFORMATION);
 
@@ -408,26 +409,6 @@ void SpadesBoard::onBidButton()
 void SpadesBoard::takeTurn()
 {
 
-	if (players[0].getScore() >= 200 || players[1].getScore() >= 200 || players[2].getScore() >= 200 || players[3].getScore() >= 200) //checks if anyone has won.
-
-	{
-		int highest = players[0].getScore();
-		int highestIndex = 0;
-		for (int i = 1; i < players.size(); i++)
-		{
-			if (players[i].getScore() > highest)
-			{
-				highest = players[i].getScore();
-				highestIndex = i;
-			}
-		}
-		std::string message = "Player " + std::to_string(highestIndex + 1) + " is the winner!";
-		wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
-		Hide();
-		
-		//we need to make it so when the game is over it will take you back to the game select screen.
-	}
-
 	if (turn != 0 && centerPile.size() < 4)  //continues to take computer turns
 	{
 		int moveIndex = computerTurn(turn);
@@ -525,7 +506,28 @@ void SpadesBoard::takeTurn()
 				{
 					players[i].playerHand.clear();
 				}
-				
+				if (players[0].getScore() >= 200 || players[1].getScore() >= 200 || players[2].getScore() >= 200 || players[3].getScore() >= 200) //checks if anyone has won.
+
+				{
+					updateScoreBoard();
+					int highest = players[0].getScore();
+					int highestIndex = 0;
+					for (int i = 1; i < players.size(); i++)
+					{
+						if (players[i].getScore() > highest)
+						{
+							highest = players[i].getScore();
+							highestIndex = i;
+						}
+					}
+					std::string message = "Player " + std::to_string(highestIndex + 1) + " is the winner!";
+					wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
+					returnButton = new wxButton(this, BUTTON_RETURN_BUTTON_SPADES, _T("Exit"), wxDefaultPosition, wxSize(140, 30));
+					returnButton->Show();
+					return;
+
+					//we need to make it so when the game is over it will take you back to the game select screen.
+				}
 				for (int j = 0; j < 13; j++)
 				{
 					p2Hand[j]->Show();

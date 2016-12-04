@@ -63,7 +63,8 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	}
 	
 
-
+	returnButton = new wxButton(this, BUTTON_RETURN_BUTTON_HEARTS, _T("Exit"), wxDefaultPosition, wxSize(140, 30));
+	returnButton->Hide();
 
 	gridBox = new wxGridSizer(2, 2, 3, 3);
 	
@@ -149,6 +150,7 @@ void HeartsBoard::heartsPlay() //starts the game
 		dealCards(deck);
 		verticalBoxMain->Detach(horizontalBoxBtm);
 		SetSizerAndFit(verticalBoxMain);
+
 		updateScoreBoard();
 		displayHand(players[0].playerHand);
 		cardPass = true;
@@ -393,8 +395,12 @@ void HeartsBoard::takeTurn()
 		}
 		std::string message = "Player " + std::to_string(lowestIndex+1) + " is the winner!";
 		wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
-		Hide();
+		//Hide();
 		//we need to make it so when the game is over it will take you back to the game select screen.
+		horizontalBoxCenter->Add(returnButton);
+		returnButton->Show();
+
+		return;
 	}
 
 	if (turn != 0 && centerPile.size() < 4)  //continues to take computer turns

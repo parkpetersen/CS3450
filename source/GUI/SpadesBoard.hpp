@@ -77,9 +77,7 @@ public:
 	std::vector<Card> initializeDeck();
 	void dealCards(std::vector<Card>& Deck);
 	void displayHand(std::vector<Card>);
-	/*void passCards();
-	int findTwoOfClubs();
-	*/
+	
 	bool allSpades(std::vector<Card> h);
 	bool noLeadSuit(Suit s, std::vector<Card> h);
 	bool validateMove(int index, Card move, int numTrick, int turn);
@@ -89,6 +87,7 @@ public:
 	void score();
 	void makeBids();
 	void updateScoreBoard();
+	wxButton *returnButton;
 };
 
 enum
@@ -97,6 +96,7 @@ enum
 	BUTTON_CARD1_SPADES = wxID_HIGHEST + 36,
 	BUTTON_CARD_OTHER_SPADES = wxID_HIGHEST + 49,
 	BUTTON_CARD_OTHER2_SPADES = wxID_HIGHEST + 50,
-	BUTTON_BID = wxID_ANY
+	BUTTON_BID = wxID_ANY,
+	BUTTON_RETURN_BUTTON_SPADES = wxID_HIGHEST+99
 };
 #endif
