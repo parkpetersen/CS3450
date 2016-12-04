@@ -69,7 +69,6 @@ bool login::getInput()
 		wxMessageBox(wxT("Incorrect login information. Please try again"), wxT("Login Error"), wxICON_ERROR);
 		return false;
 	}
-
 }
 
 bool login::checkLogin(std::string un, std::string pw)

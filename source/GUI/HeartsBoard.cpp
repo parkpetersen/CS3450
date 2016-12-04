@@ -3,6 +3,9 @@
 #include "HeartsBoard.hpp"
 #include <random>
 
+#include "source/ClientInfo/Card.hpp"
+#include "source/ClientInfo/Player.hpp"
+
 
 HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
@@ -76,6 +79,11 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	verticalBoxMain->Add(horizontalBoxTop, wxCENTER, 0);
 	verticalBoxMain->Add(horizontalBoxMiddle, wxCENTER, 0);
 
+	//p1Hand[2]->Hide();
+	//horizontalBoxMid->Remove(2);
+	//centerPile[2]->Hide();
+	//horizontalBoxCenter->Remove(2);
+	//horizontalBoxCenter->Add(p1Hand[2], wxCENTER, 0);
 
 	SetSizerAndFit(verticalBoxMain);
 

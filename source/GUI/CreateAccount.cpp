@@ -55,6 +55,7 @@ void CreateAccount::getInput()
 	std::cout << username << std::endl;
 	std::cout << password << std::endl;
 	makeAccount(username, password);
+
 }
 
 void CreateAccount::makeAccount(std::string un, std::string pw)
@@ -77,14 +78,15 @@ void CreateAccount::makeAccount(std::string un, std::string pw)
 		std::cout << "Account already exists\n";
 	}
 
-	/*Note: the format for account files is:
+
+	/*Note: the format for account files is: 
 	*  Username
 	*  Password
 	*  Hearts Win/Lose: (Subtitle)
 	*  Win value
 	*  Lose value
 	*  Spades Win/Lose: (Subtitle)
-	*  Win value
+	*  Win value 
 	*  Lose value
 	*  Overall Win/Lose: (Subtitle)
 	*  Win value

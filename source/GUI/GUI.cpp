@@ -9,6 +9,7 @@
 #include "HeartsBoard.hpp"
 #include "SpadesBoard.hpp"
 
+
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -37,13 +38,13 @@ private:
   void OnCreateNewProfile(wxCommandEvent& event);
   void OnCreateCancel(wxCommandEvent& event);
   void OnLogin(wxCommandEvent& event);
-  void OnModeHearts(wxCommandEvent& event);
   void OnModeCancel(wxCommandEvent& event);
   void OnHearts(wxCommandEvent& event);
   void OnSpades(wxCommandEvent& event);
   void OnTest(wxCommandEvent& event);
   void OnPlayAgain(wxCommandEvent& event);
   void OnMainMenu(wxCommandEvent& event);
+
   void OnCard0(wxCommandEvent& event);
   void OnCard1(wxCommandEvent& event);
   void OnCard2(wxCommandEvent& event);
@@ -89,13 +90,15 @@ EVT_BUTTON(BUTTON_Hello, MyFrame::OnExit)            //Event table tells buttons
 EVT_BUTTON(BUTTON_exit, MyFrame::OnExit)
 EVT_BUTTON(BUTTON_create, MyFrame::OnCreateAccount)
 EVT_BUTTON(BUTTON_cancel, MyFrame::OnCreateCancel)
-EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateNewProfile)
 EVT_BUTTON(BUTTON_modeCancel, MyFrame::OnModeCancel)
+EVT_BUTTON(BUTTON_createProfile, MyFrame::OnCreateNewProfile)
+
 EVT_BUTTON(BUTTON_Hearts, MyFrame::OnHearts)
 EVT_BUTTON(BUTTON_Spades, MyFrame::OnSpades)
 EVT_BUTTON(BUTTON_test, MyFrame::OnTest)
 EVT_BUTTON(BUTTON_login, MyFrame::OnLogin)
 EVT_BUTTON(BUTTON_playAgain, MyFrame::OnPlayAgain)
+
 EVT_BUTTON(BUTTON_mainMenu, MyFrame::OnMainMenu)
 EVT_BUTTON(BUTTON_CARD1 + 0, MyFrame::OnCard0)
 EVT_BUTTON(BUTTON_CARD1 + 1, MyFrame::OnCard1)
@@ -144,8 +147,13 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
   wxMenu *menuFile = new wxMenu;
+<<<<<<< HEAD
   menuFile->Append(ID_Hello, "&Player Statistics...\tCtrl-H",
     "Welcome to Deal 52!");
+=======
+  menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
+    "Help string shown in status bar for this menu item");
+>>>>>>> 89a12efffdeba7341b9397a3354858fe80c5b9ee
   menuFile->AppendSeparator();
   menuFile->Append(wxID_EXIT);
   wxMenu *menuHelp = new wxMenu;
@@ -155,10 +163,11 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
   menuBar->Append(menuHelp, "&Help");
   SetMenuBar(menuBar);
   CreateStatusBar();
-  SetStatusText("Welcome to Deal 52!");
+  SetStatusText("Welcome to wxWidgets!");
   loginScreen = new login(this);
-  createAccountScreen = new CreateAccount(this); 
+  createAccountScreen = new CreateAccount(this);
   modeScreen = new PlayModeScreen(this);
+
   heartsBoard = new HeartsBoard(this);
   gameOver = new GameOver(this);
   spadesBoard = new SpadesBoard(this);
@@ -179,6 +188,7 @@ void MyFrame::OnHello(wxCommandEvent& event)
 {
 	wxMessageBox(introMessage,
 		"Welcome to Deal52", wxOK | wxICON_INFORMATION);
+
 }
 
 void MyFrame::OnCreateAccount(wxCommandEvent& event)
@@ -240,12 +250,15 @@ void MyFrame::OnPlayAgain(wxCommandEvent& event)
 {
 	gameOver->hide();
 	modeScreen->display();
+
 }
 
 void MyFrame::OnMainMenu(wxCommandEvent& event)
 {
 	gameOver->hide();
 	modeScreen->display();
+
+
 }
 
 void MyFrame::OnCard0(wxCommandEvent & event)

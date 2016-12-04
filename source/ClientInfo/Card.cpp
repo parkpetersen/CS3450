@@ -4,10 +4,9 @@
 // Standard Includes
 #include <map>
 
-Card::Card(Suit s, Value v)
+Card::Card(Suit s, Value v) :
+  suit(s), value(v)
 {
-	this->suit = s;
-	this->value = v;
 	this->imagePath = " ";
 	if (s == 0)
 		this->imagePath = "../../../../CS3450/Resources/cards/" + std::to_string(v) + "h.png";
