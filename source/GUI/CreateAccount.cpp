@@ -78,7 +78,6 @@ void CreateAccount::makeAccount(std::string un, std::string pw)
 		std::cout << "Account already exists\n";
 	}
 
-
 	/*Note: the format for account files is: 
 	*  Username
 	*  Password

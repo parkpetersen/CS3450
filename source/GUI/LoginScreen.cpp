@@ -88,7 +88,7 @@ bool login::checkLogin(std::string un, std::string pw)
 	std::getline(read, login::allWin);
 	std::getline(read, login::allLose);
 
-	if (login::username == un && login::password == pw)
+	if(login::username == un && login::password == pw)
 	{
 		return true;
 	}
