@@ -13,6 +13,8 @@ LoginScreen.hpp
 LoginScreen.cpp
 PlayModeScreen.hpp
 PlayModeScreen.cpp
+SpadesBoard.hpp
+SpadesBoard.cpp
 )
 target_link_libraries(client ClientInfo ${externLibs})
 target_include_directories(client ${externIncs})

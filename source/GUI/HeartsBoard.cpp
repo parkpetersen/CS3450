@@ -13,13 +13,14 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	//Sizers
 	verticalBoxMain = new wxFlexGridSizer(3, 0, 20, 20);
 	horizontalBoxBtm = new wxBoxSizer(wxHORIZONTAL);
-	horizontalBoxMid = new wxBoxSizer(wxHORIZONTAL);
+	horizontalBoxMid = new wxFlexGridSizer(0, 3, 200, 200);
 	horizontalBoxTop = new wxBoxSizer(wxHORIZONTAL);
 	verticalBoxLeft = new wxBoxSizer(wxVERTICAL);
 	verticalBoxCenter = new wxBoxSizer(wxVERTICAL);
 	verticalBoxRight = new wxBoxSizer(wxVERTICAL);
 
 	horizontalBoxCenter = new wxFlexGridSizer(2, 2, 10, 10);
+	horizontalBoxMiddle = new wxFlexGridSizer(0, 2, 150, 150);
 
 	//Images used to scale the Bitmap
 	wxImage pc;
@@ -65,16 +66,18 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	}
 	
 
-
+	returnButton = new wxButton(this, BUTTON_RETURN_BUTTON_HEARTS, _T("Exit"), wxDefaultPosition, wxSize(140, 30));
+	returnButton->Hide();
 
 	gridBox = new wxGridSizer(2, 2, 3, 3);
 	
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
 	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
 	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 50);
-	horizontalBoxMid->Add(gridBox, wxALIGN_CENTER, 50);
+	horizontalBoxMiddle->Add(horizontalBoxMid, wxALIGN_LEFT, 0);
+	horizontalBoxMiddle->Add(gridBox, wxALIGN_RIGHT, 0);
 	verticalBoxMain->Add(horizontalBoxTop, wxCENTER, 0);
-	verticalBoxMain->Add(horizontalBoxMid, wxCENTER, 0);
+	verticalBoxMain->Add(horizontalBoxMiddle, wxCENTER, 0);
 
 	//p1Hand[2]->Hide();
 	//horizontalBoxMid->Remove(2);
@@ -153,9 +156,21 @@ void HeartsBoard::heartsPlay() //starts the game
 		}
 		std::vector<Card> deck = initializeDeck();
 		dealCards(deck);
+		verticalBoxMain->Detach(horizontalBoxBtm);
+		SetSizerAndFit(verticalBoxMain);
+
+		updateScoreBoard();
 		displayHand(players[0].playerHand);
 		cardPass = true;
-		updateScoreBoard();
+		horizontalBoxMiddle->Layout();
+		for (int i = 0; i < 4; i++)
+		{
+			std::cout << "Player " << i << "hand." << std::endl;
+			for (int j = 0; j < 13; j++)
+			{
+				std::cout << players[i].playerHand[j].getValue() << " " << players[i].playerHand[j].getSuit() << std::endl;
+			}
+		}
 		wxMessageBox("Choose 3 cards to pass.", "Pass Cards", wxOK | wxICON_INFORMATION);
 
 	}
@@ -367,6 +382,7 @@ bool HeartsBoard::validateMove(int index, Card move, int numTrick, int turn)
 //this function is the main gameplay function and takes care of the computer's turns.
 void HeartsBoard::takeTurn()
 {
+
 	for (int i = 0; i < players.size(); i++)
 	{
 		std::cout << "Player " << i << " score: " << players[i].getScore() << std::endl;
@@ -387,8 +403,12 @@ void HeartsBoard::takeTurn()
 		}
 		std::string message = "Player " + std::to_string(lowestIndex+1) + " is the winner!";
 		wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
-		Hide();
+		//Hide();
 		//we need to make it so when the game is over it will take you back to the game select screen.
+		horizontalBoxCenter->Add(returnButton);
+		returnButton->Show();
+
+		return;
 	}
 
 	if (turn != 0 && centerPile.size() < 4)  //continues to take computer turns
@@ -430,6 +450,7 @@ void HeartsBoard::takeTurn()
 		horizontalBoxCenter->Layout();
 		if (centerPile.size() < 4)
 		{
+			wxSleep(.90);
 			takeTurn();
 		}
 	}
@@ -521,7 +542,7 @@ int HeartsBoard::endTurn(int currentPlayer)
 			maxValue = tmp.getValue();
 			maxIndex = i;
 		}
-		if (tmp.getSuit() == SPADES && tmp.getValue() == 11) score += 13;
+		if (tmp.getSuit() == SPADES && tmp.getValue() == 12) score += 13;
 		if (tmp.getSuit() == HEARTS) score++;
 	}
 	players[(maxIndex + currentPlayer) % players.size()].incrementScore(

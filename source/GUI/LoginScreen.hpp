@@ -16,9 +16,20 @@ public:
 	void hide();
 	bool getInput();
 	bool checkLogin(std::string un, std::string pw);
+	void setLogin(std::string &intro);
 	wxFlexGridSizer *verticalBox;
 	wxBoxSizer *horizontalBox;
 	wxBoxSizer *horizontalBoxTwo;
+
+	std::string username;
+	std::string password;
+	std::string temp;
+	std::string heartWin;
+	std::string heartLose;
+	std::string spadeWin;
+	std::string spadeLose;
+	std::string allWin;
+	std::string allLose;
 
 	wxTextCtrl *userNameTxt;
 	wxTextCtrl *passwordTxt;

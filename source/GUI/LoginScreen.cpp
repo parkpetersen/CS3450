@@ -21,7 +21,8 @@ login::login(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	userNameTxt = new wxTextCtrl(this, 0, "UserName", wxDefaultPosition,
 		wxSize(140, 30));
 	passwordTxt = new wxTextCtrl(this, 0, "Password", wxDefaultPosition,
-		wxSize(140, 30));
+		wxSize(140, 30), wxTE_PASSWORD);
+	passwordTxt->SetDefaultStyle(wxTextAttr(wxTE_PASSWORD));
 
 	horizontalBoxTwo->Add(userNameTxt, wxCENTER, 0);
 	horizontalBoxTwo->Add(passwordTxt, wxCENTER, 0);
@@ -53,13 +54,11 @@ void login::hide()
 
 bool login::getInput()
 {
-	std::string username;
-	std::string password;
-	username = userNameTxt->GetLineText(0);
-	password = passwordTxt->GetLineText(0);
-	std::cout<<username<<std::endl;
-	std::cout << password<<std::endl;
-	if (checkLogin(username, password))
+	login::username = userNameTxt->GetLineText(0);
+	login::password = passwordTxt->GetLineText(0);
+	std::cout << login::username << std::endl;
+	std::cout << login::password << std::endl;
+	if (checkLogin(login::username, login::password))
 	{
 		std::cout << "Correct Login!\n";
 		return true;
@@ -70,20 +69,26 @@ bool login::getInput()
 		wxMessageBox(wxT("Incorrect login information. Please try again"), wxT("Login Error"), wxICON_ERROR);
 		return false;
 	}
-
 }
 
 bool login::checkLogin(std::string un, std::string pw)
 {
-	//std::ifstream read("C:\\Users\\dozek\\Desktop\\" + un + ".txt");
+	//References for this function from https://www.youtube.com/watch?v=I_aWPGCaaFA
 	std::ifstream read("../../../../CS3450/Resources/data/" + un + ".txt");
-	std::string username;
-	std::string password;
 
-	std::getline(read, username);
-	std::getline(read, password);
+	std::getline(read, login::username);
+	std::getline(read, login::password);
+	std::getline(read, login::temp);
+	std::getline(read, login::heartWin);
+	std::getline(read, login::heartLose);
+	std::getline(read, login::temp);
+	std::getline(read, login::spadeWin);
+	std::getline(read, login::spadeLose);
+	std::getline(read, login::temp);
+	std::getline(read, login::allWin);
+	std::getline(read, login::allLose);
 
-	if (username == un && password == pw)
+	if (login::username == un && login::password == pw)
 	{
 		return true;
 	}
@@ -91,4 +96,12 @@ bool login::checkLogin(std::string un, std::string pw)
 	{
 		return false;
 	}
+}
+
+void login::setLogin(std::string &intro)
+{
+	intro = "Welcome " + login::username + \
+		".\nYou're playing statistics are:\n \n           Hearts:   Spades:   Overall:\nWin:   " + \
+		login::heartWin + "              " + login::spadeWin + "              " + login::allWin + \
+		"\nLose:  " + login::heartLose + "              " + login::spadeLose + "              " + login::allLose;
 }

@@ -13,7 +13,7 @@ PlayModeScreen::PlayModeScreen(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDe
 
 	hearts = new wxButton(this, BUTTON_Hearts, _T("Hearts"), wxDefaultPosition, wxSize(140, 30));
 	spades = new wxButton(this, BUTTON_Spades, _T("Spades"), wxDefaultPosition, wxSize(140, 30));
-	crazyEights = new wxButton(this, BUTTON_Eights, _T("Crazy Eights"), wxDefaultPosition, wxSize(140, 30));
+	//crazyEights = new wxButton(this, BUTTON_Eights, _T("Crazy Eights"), wxDefaultPosition, wxSize(140, 30));
 	modeCancel = new wxButton(this, BUTTON_modeCancel, _T("Cancel"), wxDefaultPosition, wxSize(140, 30));
 	::wxInitAllImageHandlers();
 	//test1.LoadFile("C:/Users/dozek/Desktop/cards/2_of_hearts.png", wxBITMAP_TYPE_PNG);
@@ -21,7 +21,7 @@ PlayModeScreen::PlayModeScreen(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDe
 
 	horizontalBox->Add(hearts, wxCENTER, 0);
 	horizontalBox->Add(spades, wxCENTER, 0);
-	horizontalBox->Add(crazyEights, wxCENTER, 0);
+	//horizontalBox->Add(crazyEights, wxCENTER, 0);
 	horizontalBox2->Add(modeCancel, wxCENTER, 0);
 	//horizontalBox2->Add(test2, wxCENTER, 0);
 

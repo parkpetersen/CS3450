@@ -2,6 +2,7 @@
 #include <wx/sizer.h>
 #include "CreateAccount.hpp"
 
+
 CreateAccount::CreateAccount(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
 {
@@ -62,7 +63,7 @@ void CreateAccount::makeAccount(std::string un, std::string pw)
 	//Registers an account with the entered username and password
 	//Currently uses a relative path for the login info. Is there a better approach?
 	std::ofstream file;
-	if(!std::ifstream("../../../../CS3450/Resources/data/" + un + ".txt"))
+	if (!std::ifstream("../../../../CS3450/Resources/data/" + un + ".txt"))
 	{
 		file.open("../../../../CS3450/Resources/data/" + un + ".txt");
 		file << un << std::endl << pw << std::endl;
@@ -76,6 +77,7 @@ void CreateAccount::makeAccount(std::string un, std::string pw)
 	{
 		std::cout << "Account already exists\n";
 	}
+
 
 	/*Note: the format for account files is: 
 	*  Username
