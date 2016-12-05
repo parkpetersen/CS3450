@@ -70,7 +70,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	returnButton->Hide();
 
 	gridBox = new wxGridSizer(2, 2, 3, 3);
-	
+
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
 	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
 	horizontalBoxMid->Add(verticalBoxRight, wxALIGN_RIGHT, 50);
@@ -158,7 +158,6 @@ void HeartsBoard::heartsPlay() //starts the game
 		dealCards(deck);
 		verticalBoxMain->Detach(horizontalBoxBtm);
 		SetSizerAndFit(verticalBoxMain);
-
 		updateScoreBoard();
 		displayHand(players[0].playerHand);
 		cardPass = true;

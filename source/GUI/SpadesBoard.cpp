@@ -62,9 +62,6 @@ SpadesBoard::SpadesBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 	}
 
-
-
-
 	gridBox = new wxGridSizer(7, 2, 3, 3);
 
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
@@ -344,7 +341,6 @@ void SpadesBoard::updateScoreBoard()
 	p3Bag << players[2].getBags();
 	p4Bag << players[3].getBags();
 
-
 	player1Score = "Your Score: " + p1Score;
 	player2Score = "Player 2 Score: " + p2Score;
 	player3Score = "Player 3 Score: " + p3Score;
@@ -357,7 +353,6 @@ void SpadesBoard::updateScoreBoard()
 	player2Bags = "Player 2 bags: " + p2Bag;
 	player3Bags = "Player 3 bags: " + p3Bag;
 	player4Bags = "Player 4 bags: " + p4Bag;
-
 
 	gridBox->Clear();
 
