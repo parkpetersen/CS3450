@@ -8,6 +8,7 @@
 #include <string>
 // Standard Includes
 #include <memory>
+#include <algorithm>
 
 class Player
 {
@@ -23,7 +24,7 @@ public:
   void playCard(std::unique_ptr<Card>);
   void insertCardToHand(Card card);
   int getScore();
-
+  void setScore(int);
   int getBid() const;
   void setBid(int);
   int getBags() const;
@@ -31,6 +32,7 @@ public:
   int getTricksWon() const;
   void setTricksWon(int);
   void incrementTricksWon();
+  void organizeHand(std::vector<Card>& userHand);
 };
 
 #endif

@@ -16,6 +16,11 @@ int Player::getScore()
 	return this->playerScore;
 }
 
+void Player::setScore(int score)
+{
+	this->playerScore = score;
+}
+
 int Player::getBid() const
 {
 	return this->bid;
@@ -31,6 +36,11 @@ int Player::getBags() const
 	return this->bags;
 }
 
+void Player::setBags(int bag)
+{
+	this->bags = bag;
+}
+
 int Player::getTricksWon() const
 {
 	return this->tricksWon;
@@ -44,4 +54,9 @@ void Player::incrementTricksWon()
 void Player::incrementScore(int i)
 {
 	playerScore += i;
+}
+
+void Player::organizeHand(std::vector<Card>& userHand)
+{
+	std::sort(userHand.begin(), userHand.end());
 }

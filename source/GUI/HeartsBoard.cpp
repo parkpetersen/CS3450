@@ -567,6 +567,7 @@ void HeartsBoard::dealCards(std::vector<Card>& Deck)
 			players[i].insertCardToHand(Deck[(j)+(13 * i)]);
 		}
 	}
+	players[0].organizeHand(players[0].playerHand);
 }
 
 void HeartsBoard::updateScoreBoard()

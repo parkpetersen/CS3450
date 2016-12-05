@@ -34,14 +34,24 @@ public:
 	wxString player3Bid;
 	wxString player4Bid;
 
+	wxString player1Bags;
+	wxString player2Bags;
+	wxString player3Bags;
+	wxString player4Bags;
+
+
 	wxStaticText *player1ScoreStaticText;
 	wxStaticText *player1BidStaticText;
+	wxStaticText *player1BagStaticText;
 	wxStaticText *player2ScoreStaticText;
 	wxStaticText *player2BidStaticText;
+	wxStaticText *player2BagStaticText;
 	wxStaticText *player3ScoreStaticText;
 	wxStaticText *player3BidStaticText;
+	wxStaticText *player3BagStaticText;
 	wxStaticText *player4ScoreStaticText;
 	wxStaticText *player4BidStaticText;
+	wxStaticText *player4BagStaticText;
 
 	//sizers
 	wxGridSizer *gridBox;
