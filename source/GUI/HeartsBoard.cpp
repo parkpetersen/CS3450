@@ -238,8 +238,10 @@ void HeartsBoard::passCards() //passes the three cards to another player (incomp
 	cardsToPass.clear();
 	p1PassCardsIndices.clear();
 	cardPass = false;
-	displayHand(players[0].playerHand);
+	//displayHand(players[0].playerHand);
 	turn = findTwoOfClubs();
+	players[0].organizeHand(players[0].playerHand);
+	displayHand(players[0].playerHand);
 	takeTurn();
 
 
