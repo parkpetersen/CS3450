@@ -34,14 +34,24 @@ public:
 	wxString player3Bid;
 	wxString player4Bid;
 
+	wxString player1Bags;
+	wxString player2Bags;
+	wxString player3Bags;
+	wxString player4Bags;
+
+
 	wxStaticText *player1ScoreStaticText;
 	wxStaticText *player1BidStaticText;
+	wxStaticText *player1BagStaticText;
 	wxStaticText *player2ScoreStaticText;
 	wxStaticText *player2BidStaticText;
+	wxStaticText *player2BagStaticText;
 	wxStaticText *player3ScoreStaticText;
 	wxStaticText *player3BidStaticText;
+	wxStaticText *player3BagStaticText;
 	wxStaticText *player4ScoreStaticText;
 	wxStaticText *player4BidStaticText;
+	wxStaticText *player4BagStaticText;
 
 	//sizers
 	wxGridSizer *gridBox;
@@ -88,6 +98,8 @@ public:
 	void makeBids();
 	void updateScoreBoard();
 	wxButton *returnButton;
+	wxButton *hintButton;
+	void giveHint();
 };
 
 enum
@@ -97,6 +109,7 @@ enum
 	BUTTON_CARD_OTHER_SPADES = wxID_HIGHEST + 49,
 	BUTTON_CARD_OTHER2_SPADES = wxID_HIGHEST + 50,
 	BUTTON_BID = wxID_ANY,
-	BUTTON_RETURN_BUTTON_SPADES = wxID_HIGHEST+99
+	BUTTON_RETURN_BUTTON_SPADES = wxID_HIGHEST+99,
+	BUTTON_HINT_SPADES = wxID_HIGHEST+100
 };
 #endif

@@ -3,10 +3,6 @@
 #include "HeartsBoard.hpp"
 #include <random>
 
-#include "source/ClientInfo/Card.hpp"
-#include "source/ClientInfo/Player.hpp"
-
-
 HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
 {
@@ -20,7 +16,7 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	verticalBoxRight = new wxBoxSizer(wxVERTICAL);
 
 	horizontalBoxCenter = new wxFlexGridSizer(2, 2, 10, 10);
-	horizontalBoxMiddle = new wxFlexGridSizer(0, 2, 150, 150);
+	horizontalBoxMiddle = new wxFlexGridSizer(0, 3, 150, 150);
 
 	//Images used to scale the Bitmap
 	wxImage pc;
@@ -67,9 +63,10 @@ HeartsBoard::HeartsBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 	
 
 	returnButton = new wxButton(this, BUTTON_RETURN_BUTTON_HEARTS, _T("Exit"), wxDefaultPosition, wxSize(140, 30));
-	returnButton->Hide();
+	hintButton = new wxButton(this, BUTTON_HINT_HEARTS, _T("Hint"), wxDefaultPosition, wxSize(140, 30));
 
-	gridBox = new wxGridSizer(2, 2, 3, 3);
+	
+	gridBox = new wxGridSizer(3, 2, 3, 3);
 
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
 	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
@@ -158,6 +155,10 @@ void HeartsBoard::heartsPlay() //starts the game
 		dealCards(deck);
 		verticalBoxMain->Detach(horizontalBoxBtm);
 		SetSizerAndFit(verticalBoxMain);
+		/*for (int i = 0; i < 4; i++)
+		{
+			players[i].incrementScore(99);
+		}*/
 		updateScoreBoard();
 		displayHand(players[0].playerHand);
 		cardPass = true;
@@ -314,6 +315,8 @@ bool HeartsBoard::validateMove(int index, Card move, int numTrick, int turn)
 		}
 		else
 		{
+			if (move.getSuit() == UNDEFINED)
+				return false;
 			if (move.getSuit() != lead && noLeadSuit(lead, players[index].playerHand))
 			{
 				if (move.getSuit() == HEARTS && brokenHearts)
@@ -337,6 +340,8 @@ bool HeartsBoard::validateMove(int index, Card move, int numTrick, int turn)
 	}
 	else
 	{
+		if (move.getSuit() == UNDEFINED)
+			return false;
 		if (centerPile.size() == 0)
 		{
 			if (move.getSuit() == UNDEFINED)
@@ -354,6 +359,8 @@ bool HeartsBoard::validateMove(int index, Card move, int numTrick, int turn)
 		}
 		else
 		{
+			if (move.getSuit() == UNDEFINED)
+				return false;
 			if (move.getSuit() != lead && noLeadSuit(lead, players[index].playerHand))
 			{
 				if (move.getSuit() == HEARTS && brokenHearts)
@@ -404,8 +411,8 @@ void HeartsBoard::takeTurn()
 		wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
 		//Hide();
 		//we need to make it so when the game is over it will take you back to the game select screen.
-		horizontalBoxCenter->Add(returnButton);
-		returnButton->Show();
+		/*horizontalBoxCenter->Add(returnButton);
+		returnButton->Show();*/
 
 		return;
 	}
@@ -566,6 +573,7 @@ void HeartsBoard::dealCards(std::vector<Card>& Deck)
 			players[i].insertCardToHand(Deck[(j)+(13 * i)]);
 		}
 	}
+	players[0].organizeHand(players[0].playerHand);
 }
 
 void HeartsBoard::updateScoreBoard()
@@ -591,6 +599,51 @@ void HeartsBoard::updateScoreBoard()
 		wxSize(140, 30)), 1, wxCENTER, 0);
 	gridBox->Add(new wxStaticText(this, 0, player4Score, wxDefaultPosition,
 		wxSize(140, 30)), 1, wxCENTER, 0);
+	gridBox->Add(returnButton);
+	gridBox->Add(hintButton);
 	gridBox->Layout();
 	horizontalBoxMid->Layout();
+}
+
+void HeartsBoard::giveHint()
+{
+	if (cardPass)
+	{
+		wxMessageBox("Choose 3 cards to pass.", "Pass Cards", wxOK | wxICON_INFORMATION);
+	}
+	else
+	{
+		for (int i = 0; i < players[0].playerHand.size(); i++)
+		{
+			if (validateMove(0, players[0].playerHand[i], trickNum, turnOrder))
+			{
+				wxString hintVal, hintSuit;
+				if (players[0].playerHand[i].getValue() == 11)
+					hintVal = "Jack";
+				else if (players[0].playerHand[i].getValue() == 12)
+					hintVal = "Queen";
+				else if (players[0].playerHand[i].getValue() == 13)
+					hintVal = "King";
+				else if (players[0].playerHand[i].getValue() == 14)
+					hintVal = "Ace";
+				else
+					hintVal << players[0].playerHand[i].getValue();
+				if (players[0].playerHand[i].getSuit() == 0)
+					hintSuit = "Hearts";
+				else if (players[0].playerHand[i].getSuit() == 1)
+					hintSuit = "Spades";
+				else if (players[0].playerHand[i].getSuit() == 2)
+					hintSuit = "Clubs";
+				else if (players[0].playerHand[i].getSuit() == 3)
+					hintSuit = "Diamonds";				
+					
+				wxString hint = "Play the " + hintVal + " of " + hintSuit + "!";
+				wxMessageBox(hint, "Hint", wxOK | wxICON_INFORMATION);
+				return;
+
+
+			}
+		}
+	}
+
 }
