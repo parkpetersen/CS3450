@@ -136,7 +136,6 @@ void SpadesBoard::spadesPlay() //starts the game
 		for (int i = 0; i < 4; i++)
 		{
 			std::cout << "Player " << i << " hand: " << std::endl;
-			players[i].incrementScore(199);
 			for (int j = 0; j < 13; j++)
 			{
 				std::cout << players[i].playerHand[j].getValue() << " " << players[i].playerHand[j].getSuit() << std::endl;
