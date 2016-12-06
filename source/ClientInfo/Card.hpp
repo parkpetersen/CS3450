@@ -43,13 +43,15 @@ private:
   std::string imagePath;
 
 public:
+	void setSuit(Suit);
   Suit getSuit();
   Value getValue();
   std::string getImagePath();
   Card(Suit s, Value v);
+
+
 };
 
+bool operator<(Card& card, Card& otherCard);
+
 #endif
-
-bool operator<(const Card& card, const Card& otherCard);
-

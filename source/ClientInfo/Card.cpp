@@ -7,8 +7,6 @@
 Card::Card(Suit s, Value v) :
   suit(s), value(v)
 {
-	this->suit = s;
-	this->value = v;
 	this->imagePath = " ";
 	if (s == 0)
 		this->imagePath = "../../../../CS3450/Resources/cards/" + std::to_string(v) + "h.png";
@@ -18,6 +16,11 @@ Card::Card(Suit s, Value v) :
 		this->imagePath = "../../../../CS3450/Resources/cards/" + std::to_string(v) + "c.png";
 	else if (s==3)
 		this->imagePath = "../../../../CS3450/Resources/cards/" + std::to_string(v) + "d.png";
+}
+
+void Card::setSuit(Suit newSuit)
+{
+	this->suit = newSuit;
 }
 
 Suit Card::getSuit()
