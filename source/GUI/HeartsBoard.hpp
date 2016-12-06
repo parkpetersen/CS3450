@@ -70,6 +70,9 @@ public:
 	void dealCards(std::vector<Card>& Deck);
 	void updateScoreBoard();
 	wxButton *returnButton;
+	wxButton *hintButton;
+	void giveHint();
+
 };
 
 enum
@@ -78,6 +81,7 @@ enum
 	BUTTON_CARD1 = wxID_HIGHEST + 17,
 	BUTTON_CARD_OTHER = wxID_HIGHEST + 30,
 	BUTTON_CARD_OTHER2 = wxID_HIGHEST + 31,
-	BUTTON_RETURN_BUTTON_HEARTS = wxID_HIGHEST+51
+	BUTTON_RETURN_BUTTON_HEARTS = wxID_HIGHEST+51,
+	BUTTON_HINT_HEARTS = wxID_HIGHEST+98
 };
 #endif

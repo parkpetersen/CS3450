@@ -4,7 +4,6 @@
 #include <random>
 #include <time.h>
 
-
 SpadesBoard::SpadesBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition,
 	wxSize(wxSystemSettings::GetMetric(wxSYS_SCREEN_X)*.5, wxSystemSettings::GetMetric(wxSYS_SCREEN_Y)*.5), wxTAB_TRAVERSAL, wxPanelNameStr)
 {
@@ -62,7 +61,7 @@ SpadesBoard::SpadesBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 	}
 
-	gridBox = new wxGridSizer(7, 2, 3, 3);
+	gridBox = new wxGridSizer(8, 2, 3, 3);
 
 	horizontalBoxMid->Add(verticalBoxLeft, wxALIGN_LEFT, 50);
 	horizontalBoxMid->Add(horizontalBoxCenter, wxALIGN_CENTER, 50);
@@ -73,6 +72,10 @@ SpadesBoard::SpadesBoard(wxFrame* parent) : wxPanel(parent, wxID_ANY, wxDefaultP
 
 
 	SetSizerAndFit(verticalBoxMain);
+
+	returnButton = new wxButton(this, BUTTON_RETURN_BUTTON_SPADES, _T("Exit"), wxDefaultPosition, wxSize(140, 30));
+	hintButton = new wxButton(this, BUTTON_HINT_SPADES, _T("Hint"), wxDefaultPosition, wxSize(140, 30));
+
 
 	CenterOnParent();
 	Show(0);
@@ -133,6 +136,7 @@ void SpadesBoard::spadesPlay() //starts the game
 		for (int i = 0; i < 4; i++)
 		{
 			std::cout << "Player " << i << " hand: " << std::endl;
+			players[i].incrementScore(199);
 			for (int j = 0; j < 13; j++)
 			{
 				std::cout << players[i].playerHand[j].getValue() << " " << players[i].playerHand[j].getSuit() << std::endl;
@@ -215,6 +219,8 @@ bool SpadesBoard::validateMove(int index, Card move, int numTrick, int turn)
 {
 	Suit lead;
 	if (centerPile.size() > 0) lead = centerPile[0].getSuit();
+	if (move.getSuit() == UNDEFINED)
+		return false;
 	if (turn == 0)
 	{
 		if (centerPile.size() == 0)
@@ -400,9 +406,53 @@ void SpadesBoard::updateScoreBoard()
 	gridBox->Add(player2BagStaticText);
 	gridBox->Add(player3BagStaticText);
 	gridBox->Add(player4BagStaticText);
+	gridBox->Add(returnButton);
+	gridBox->Add(hintButton);
 
 	gridBox->Layout();
 	horizontalBoxMid->Layout();
+}
+
+void SpadesBoard::giveHint()
+{
+	if (bidMode)
+	{
+		wxMessageBox("Enter bid then click bid button.", "Bid.", wxOK | wxICON_INFORMATION);
+	}
+	else
+	{
+		for (int i = 0; i < players[0].playerHand.size(); i++)
+		{
+			if (validateMove(0, players[0].playerHand[i], trickNum, turnOrder))
+			{
+				wxString hintVal, hintSuit;
+				if (players[0].playerHand[i].getValue() == 11)
+					hintVal = "Jack";
+				else if (players[0].playerHand[i].getValue() == 12)
+					hintVal = "Queen";
+				else if (players[0].playerHand[i].getValue() == 13)
+					hintVal = "King";
+				else if (players[0].playerHand[i].getValue() == 14)
+					hintVal = "Ace";
+				else
+					hintVal << players[0].playerHand[i].getValue();
+				if (players[0].playerHand[i].getSuit() == 0)
+					hintSuit = "Hearts";
+				else if (players[0].playerHand[i].getSuit() == 1)
+					hintSuit = "Spades";
+				else if (players[0].playerHand[i].getSuit() == 2)
+					hintSuit = "Clubs";
+				else if (players[0].playerHand[i].getSuit() == 3)
+					hintSuit = "Diamonds";
+
+				wxString hint = "Play the " + hintVal + " of " + hintSuit + "!";
+				wxMessageBox(hint, "Hint", wxOK | wxICON_INFORMATION);
+				return;
+
+
+			}
+		}
+	}
 }
 
 void SpadesBoard::onBidButton()
@@ -516,6 +566,7 @@ void SpadesBoard::takeTurn()
 				player2BagStaticText->Destroy();
 				player3BagStaticText->Destroy();
 				player4BagStaticText->Destroy();
+				bidButton->Destroy();
 				//updateScoreBoard();
 				centerPile.clear();
 				trickNum = 0;
@@ -544,8 +595,7 @@ void SpadesBoard::takeTurn()
 					}
 					std::string message = "Player " + std::to_string(highestIndex + 1) + " is the winner!";
 					wxMessageBox(message, "Game Over", wxOK | wxICON_INFORMATION);
-					returnButton = new wxButton(this, BUTTON_RETURN_BUTTON_SPADES, _T("Exit"), wxDefaultPosition, wxSize(140, 30));
-					returnButton->Show();
+					//returnButton->Show();
 					return;
 
 					//we need to make it so when the game is over it will take you back to the game select screen.

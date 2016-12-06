@@ -98,6 +98,8 @@ public:
 	void makeBids();
 	void updateScoreBoard();
 	wxButton *returnButton;
+	wxButton *hintButton;
+	void giveHint();
 };
 
 enum
@@ -107,6 +109,7 @@ enum
 	BUTTON_CARD_OTHER_SPADES = wxID_HIGHEST + 49,
 	BUTTON_CARD_OTHER2_SPADES = wxID_HIGHEST + 50,
 	BUTTON_BID = wxID_ANY,
-	BUTTON_RETURN_BUTTON_SPADES = wxID_HIGHEST+99
+	BUTTON_RETURN_BUTTON_SPADES = wxID_HIGHEST+99,
+	BUTTON_HINT_SPADES = wxID_HIGHEST+100
 };
 #endif

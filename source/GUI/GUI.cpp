@@ -74,6 +74,8 @@ private:
   void OnBid(wxCommandEvent& event);
   void OnReturnButtonHearts(wxCommandEvent& event);
   void OnReturnButtonSpades(wxCommandEvent& event);
+  void OnHintButtonHearts(wxCommandEvent& event);
+  void OnHintButtonSpades(wxCommandEvent& event);
 
   wxDECLARE_EVENT_TABLE();
 };
@@ -113,7 +115,8 @@ EVT_BUTTON(BUTTON_CARD1 + 9, MyFrame::OnCard9)
 EVT_BUTTON(BUTTON_CARD1 + 10, MyFrame::OnCard10)
 EVT_BUTTON(BUTTON_CARD1 + 11, MyFrame::OnCard11)
 EVT_BUTTON(BUTTON_CARD1 + 12, MyFrame::OnCard12)
-EVT_BUTTON(wxID_HIGHEST + 51, MyFrame::OnExit)
+EVT_BUTTON(BUTTON_RETURN_BUTTON_HEARTS, MyFrame::OnReturnButtonHearts)
+EVT_BUTTON(BUTTON_HINT_HEARTS, MyFrame::OnHintButtonHearts)
 EVT_BUTTON(BUTTON_CARD1_SPADES + 0, MyFrame::OnCard0_SPADES)
 EVT_BUTTON(BUTTON_CARD1_SPADES + 1, MyFrame::OnCard1_SPADES)
 EVT_BUTTON(BUTTON_CARD1_SPADES + 2, MyFrame::OnCard2_SPADES)
@@ -127,7 +130,8 @@ EVT_BUTTON(BUTTON_CARD1_SPADES + 9, MyFrame::OnCard9_SPADES)
 EVT_BUTTON(BUTTON_CARD1_SPADES + 10, MyFrame::OnCard10_SPADES)
 EVT_BUTTON(BUTTON_CARD1_SPADES + 11, MyFrame::OnCard11_SPADES)
 EVT_BUTTON(BUTTON_CARD1_SPADES + 12, MyFrame::OnCard12_SPADES)
-EVT_BUTTON(BUTTON_RETURN_BUTTON_SPADES, MyFrame::OnExit)
+EVT_BUTTON(BUTTON_RETURN_BUTTON_SPADES, MyFrame::OnReturnButtonSpades)
+EVT_BUTTON(BUTTON_HINT_SPADES, MyFrame::OnHintButtonSpades)
 EVT_BUTTON(BUTTON_BID, MyFrame::OnBid)
 
 
@@ -442,6 +446,7 @@ void MyFrame::OnBid(wxCommandEvent & event)
 void MyFrame::OnReturnButtonHearts(wxCommandEvent & event)
 {
 	heartsBoard->hide();
+	this->RemoveChild(heartsBoard);
 	heartsBoard->DestroyChildren();
 	heartsBoard->Destroy();
 	heartsBoard = new HeartsBoard(this);
@@ -451,10 +456,21 @@ void MyFrame::OnReturnButtonHearts(wxCommandEvent & event)
 void MyFrame::OnReturnButtonSpades(wxCommandEvent & event)
 {
 	spadesBoard->hide();
+	this->RemoveChild(spadesBoard);
 	spadesBoard->DestroyChildren();
 	spadesBoard->Destroy();
 	spadesBoard = new SpadesBoard(this);
 	modeScreen->display();
+}
+
+void MyFrame::OnHintButtonHearts(wxCommandEvent & event)
+{
+	heartsBoard->giveHint();
+}
+
+void MyFrame::OnHintButtonSpades(wxCommandEvent & event)
+{
+	spadesBoard->giveHint();
 }
 
 int main(int argc, char* argv[])
