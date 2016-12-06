@@ -1,6 +1,8 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
+
 #include <wx/wxprec.h>
+#include "source/NetworkInterface/ClientNetworkInterface.hpp"
 
 #include "PlayModeScreen.hpp"
 #include "GameOver.hpp"
@@ -8,7 +10,6 @@
 #include "CreateAccount.hpp"
 #include "HeartsBoard.hpp"
 #include "SpadesBoard.hpp"
-
 
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -475,6 +476,13 @@ void MyFrame::OnHintButtonSpades(wxCommandEvent & event)
 
 int main(int argc, char* argv[])
 {
+  io_service service;
+  ClientNetworkInterface NI(0, service, std::cout);
+  NI.connect("127.0.0.1", 12000);
+  if (NI.isConnected())
+  {
+    std::cout << "We've successfully connected to the Server" << std::endl;
+  }
   wxApp* pApp = new MyApp();
   wxApp::SetInstance(pApp);
   wxEntry(argc, argv);
