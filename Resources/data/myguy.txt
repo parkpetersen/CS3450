@@ -1,0 +1,11 @@
+myguy
+something
+Hearts Win/Lose
+0
+0
+Spades Win/Lose
+0
+0
+Overall Win/Lose
+0
+0
